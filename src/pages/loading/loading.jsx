@@ -1,13 +1,17 @@
 import Lottie from "lottie-react";
-import loadingLottie from "../assets/lottie/loadingLottie.json";
+import loadingLottie from "../../assets/loadingLottie.json";
+import { useSetScreenSize } from "../../setScreenHeight";
+import * as styles from './loadingStyle'
 
 function LoadingScreen() {
+    useSetScreenSize();
+
   return (
-    <LoadingScreenContainer>
-      <LottieContainer>
+    <styles.LoadingScreenContainer>
+      <styles.LottieContainer>
         <Lottie animationData={loadingLottie} />
-      </LottieContainer>
-    </LoadingScreenContainer>
+      </styles.LottieContainer>
+    </styles.LoadingScreenContainer>
   );
 }
 

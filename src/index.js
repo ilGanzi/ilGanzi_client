@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
-import Root from './pages/login/root';
+import Root from './pages/login/login';
 import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 import reportWebVitals from './reportWebVitals';
 import {
@@ -11,14 +11,23 @@ import {
 } from "react-router-dom";
 import SettingPage from './pages/setting/setting';
 import setScreenHeight from './setScreenHeight';
+import LoadingScreen from './pages/loading/loading';
+import LoginPage from './pages/login/login';
+import MainPage from './pages/main/main';
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Root/>,
+    element: <MainPage/>,
   },{
     path: "/settings",
     element: <SettingPage />,
+  },,{
+    path: "/loading",
+    element: <LoadingScreen />,
+  },,{
+    path: "/login",
+    element: <LoginPage />,
   },
 ]);
 

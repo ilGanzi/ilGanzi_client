@@ -1,6 +1,6 @@
-import * as styles from './style'
+import * as styles from './loginStyle'
 
-export default function Root() {
+export default function LoginPage() {
   return (
     <styles.Container>
         <styles.MainSection>
