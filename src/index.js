@@ -10,6 +10,7 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import SettingPage from './pages/setting/setting';
+import setScreenHeight from './setScreenHeight';
 
 const router = createBrowserRouter([
   {
@@ -20,6 +21,7 @@ const router = createBrowserRouter([
     element: <SettingPage />,
   },
 ]);
+
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
