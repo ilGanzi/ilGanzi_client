@@ -38,6 +38,16 @@ export const Watering = styled.div`
     text-decoration: underline;
     padding: 20px;
     `
+export const OneMoreWateringSection = styled.div`
+    display: flex;
+    flex-direction: column;
+    justity-content: center;
+    align-items: center;
+    `
+
+export const OneMoreWatering = styled.img`
+    width: 50%;
+`
 export const Plant = styled.img`
     width: 50%;
     `
