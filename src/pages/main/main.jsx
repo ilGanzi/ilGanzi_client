@@ -4,9 +4,16 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars } from "@fortawesome/free-solid-svg-icons";
 import backgroundImage from '../../assets/mainBackground.png'
 import plant from '../../assets/plant.png'
+import Sidebar from '../../components/sidebar/sidebar';
+import { useState } from 'react';
 
 export default function MainPage(){
     useSetScreenSize();
+    const [isOpen,setIsOpen] = useState(false);
+    const toggleSlide = () => {
+        setIsOpen(true);
+    };
+
     return(
         <styles.MainContainer style={{
             backgroundImage: `url(${backgroundImage})`,
@@ -14,7 +21,8 @@ export default function MainPage(){
         }}>
             <styles.HeaderContainer>
                 <styles.TreeInf>새싹이의 지구 LV.1</styles.TreeInf>
-                <FontAwesomeIcon icon={faBars} style={{color: "#000000"}}/>
+                <FontAwesomeIcon icon={faBars} onClick={toggleSlide}/>
+                <Sidebar isOpen={isOpen} setIsOpen={setIsOpen}/>
             </styles.HeaderContainer>
             <styles.WateringInf>💧 물(1/10)</styles.WateringInf>
             <styles.Watering>오늘의 물주기</styles.Watering>
