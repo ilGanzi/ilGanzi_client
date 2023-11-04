@@ -2,18 +2,22 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
-import Root from './routes/root';
+import Root from './pages/login/root';
 import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 import reportWebVitals from './reportWebVitals';
 import {
   createBrowserRouter,
   RouterProvider,
 } from "react-router-dom";
+import SettingPage from './pages/setting/setting';
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Root/>,
+  },{
+    path: "/settings",
+    element: <SettingPage />,
   },
 ]);
 
