@@ -29,7 +29,7 @@ const Sidebar = ({isOpen,setIsOpen}) => {
         </styles.SidebarHead>
         <styles.Content>
           <styles.ContentIcon icon={faGift}/>
-          <styles.ContentLink>이용 방법</styles.ContentLink>
+          <styles.ContentLink>서비스 소개</styles.ContentLink>
         </styles.Content>
         <styles.Content style={{paddingBottom: '50px', borderBottom: '1px solid lightgrey'}}>
           <styles.ContentIcon icon={faBook}/>

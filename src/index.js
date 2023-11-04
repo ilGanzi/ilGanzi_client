@@ -14,6 +14,7 @@ import setScreenHeight from './setScreenHeight';
 import LoadingScreen from './pages/loading/loading';
 import LoginPage from './pages/login/login';
 import MainPage from './pages/main/main';
+import OnBorn from './pages/onborn/onborn';
 
 const router = createBrowserRouter([
   {
@@ -28,7 +29,10 @@ const router = createBrowserRouter([
   },,{
     path: "/login",
     element: <LoginPage />,
-  },
+  },{
+    path: "/born",
+    element: <OnBorn />
+  }
 ]);
 
 
