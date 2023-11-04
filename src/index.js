@@ -2,20 +2,39 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
-import Root from './routes/root';
+import Root from './pages/login/login';
 import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 import reportWebVitals from './reportWebVitals';
 import {
   createBrowserRouter,
   RouterProvider,
 } from "react-router-dom";
+import SettingPage from './pages/setting/setting';
+import setScreenHeight from './setScreenHeight';
+import LoadingScreen from './pages/loading/loading';
+import LoginPage from './pages/login/login';
+import MainPage from './pages/main/main';
+import OnBorn from './pages/onborn/onborn';
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Root/>,
-  },
+    element: <MainPage/>,
+  },{
+    path: "/settings",
+    element: <SettingPage />,
+  },,{
+    path: "/loading",
+    element: <LoadingScreen />,
+  },,{
+    path: "/login",
+    element: <LoginPage />,
+  },{
+    path: "/born",
+    element: <OnBorn />
+  }
 ]);
+
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
