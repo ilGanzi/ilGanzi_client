@@ -18,7 +18,7 @@ const Sidebar = ({isOpen,setIsOpen}) => {
   }
   const handleOutside = (e) => {
     if(!outside.current.contains(e.target)){
-
+      setIsOpen(false)
     }
   }
 
@@ -30,10 +30,6 @@ const Sidebar = ({isOpen,setIsOpen}) => {
         <styles.Content>
           <styles.ContentIcon icon={faGift}/>
           <styles.ContentLink>이용 방법</styles.ContentLink>
-        </styles.Content>
-        <styles.Content>
-          <styles.ContentIcon icon={faHouse}/>
-          <styles.ContentLink>홈 화면 바로가기</styles.ContentLink>
         </styles.Content>
         <styles.Content style={{paddingBottom: '50px', borderBottom: '1px solid lightgrey'}}>
           <styles.ContentIcon icon={faBook}/>
