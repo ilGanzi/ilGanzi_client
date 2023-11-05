@@ -9,10 +9,11 @@ import {
 } from "react-router-dom";
 import SettingPage from './pages/setting/setting';
 import setScreenHeight from './setScreenHeight';
-import LoginPage from './pages/login/login';
+import LoginInf from './pages/logininf/logininf';
 import MainPage from './pages/main/main';
 import OnBorn from './pages/onborn/onborn';
 import Intro from './pages/intro/intro';
+import Login from './pages/login/login';
 
 const router = createBrowserRouter([
   {
@@ -22,8 +23,11 @@ const router = createBrowserRouter([
     path: "/settings",
     element: <SettingPage />,
   },{
+    path: "/logininf",
+    element: <LoginInf />,
+  },{
     path: "/login",
-    element: <LoginPage />,
+    element: <Login />
   },{
     path: "/born",
     element: <OnBorn />

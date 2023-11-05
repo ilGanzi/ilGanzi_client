@@ -1,14 +1,27 @@
-import * as styles from './loginStyle'
+import * as styles from "./loginStyle";
 
-export default function LoginPage() {
-  return (
-    <styles.Container>
-        <styles.MainSection>
-          <styles.TitlePic></styles.TitlePic>
-          <styles.Title>세피로트</styles.Title>
-          <styles.SubTitle>부제 들어갈 곳</styles.SubTitle>
-          <styles.SignupButton>회원가입하고 나만의 나무 기르기</styles.SignupButton>
-        </styles.MainSection>
-    </styles.Container>
-  );
-}
+export default function Login(){
+    return(
+        <styles.Container>
+            <styles.ServiceInfo>
+                <div>로고</div>
+                <styles.SubTitle>서비스 한 줄 설명</styles.SubTitle>
+            </styles.ServiceInfo>
+            <styles.LoginInfo>
+                <styles.Classify>이메일 주소</styles.Classify>
+                <styles.EmailInputWrapper>
+                    <styles.EmailInput/>
+                    <styles.NaverMail>@ naver.com</styles.NaverMail>
+                </styles.EmailInputWrapper>
+                <styles.Classify>비밀번호</styles.Classify>
+                <styles.PassWordInput/>
+                <styles.LoginButton>LOGIN</styles.LoginButton>
+            </styles.LoginInfo>
+            <styles.LoginOption>
+                <styles.ForgotId>아이디 찾기</styles.ForgotId>
+                <styles.ForgotPw>비밀번호 찾기</styles.ForgotPw>
+                <styles.Signup>회원가입</styles.Signup>
+            </styles.LoginOption>
+        </styles.Container>
+    );
+};
