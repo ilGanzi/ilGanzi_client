@@ -3,7 +3,7 @@ import loadingLottie from "../../assets/loadingLottie.json";
 import { useSetScreenSize } from "../../setScreenHeight";
 import * as styles from './loadingStyle'
 
-function LoadingScreen() {
+const LoadingScreen = () => {
     useSetScreenSize();
 
   return (
@@ -13,6 +13,6 @@ function LoadingScreen() {
       </styles.LottieContainer>
     </styles.LoadingScreenContainer>
   );
-}
+};
 
 export default LoadingScreen;

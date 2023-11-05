@@ -8,12 +8,15 @@ import Sidebar from '../../components/sidebar/sidebar';
 import { useState } from 'react';
 import Advertise from '../../components/advertise/advertise';
 import oneMoreWatering from '../../assets/onemorewatering.png';
+import { Link } from "react-router-dom";
+import LoadingScreen from '../../components/loading/loading';
 
 export default function MainPage(){
     useSetScreenSize();
     const [isOpen,setIsOpen] = useState(false);
     const [isWatered, setIsWatered] = useState(false);
     const [isAdOpen,setIsAdOpen] = useState(false);
+    const [isLoading, setIsLoading] = useState(true);
 
     const toggleSlide = () => {
         setIsOpen(true);
@@ -55,6 +58,7 @@ export default function MainPage(){
             {isAdOpen && 
             <Advertise isAdOpen={isAdOpen} setIsAdOpen={setIsAdOpen} />
             } 
+            {isLoading && <LoadingScreen/>} 
         </styles.MainContainer>
     );
 }

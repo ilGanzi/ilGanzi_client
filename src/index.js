@@ -11,7 +11,6 @@ import {
 } from "react-router-dom";
 import SettingPage from './pages/setting/setting';
 import setScreenHeight from './setScreenHeight';
-import LoadingScreen from './pages/loading/loading';
 import LoginPage from './pages/login/login';
 import MainPage from './pages/main/main';
 import OnBorn from './pages/onborn/onborn';
@@ -23,10 +22,7 @@ const router = createBrowserRouter([
   },{
     path: "/settings",
     element: <SettingPage />,
-  },,{
-    path: "/loading",
-    element: <LoadingScreen />,
-  },,{
+  },{
     path: "/login",
     element: <LoginPage />,
   },{
