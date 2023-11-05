@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 export const Container = styled.div`
     width: 100vw;
@@ -36,7 +37,7 @@ export const PlantInf = styled.div`
     text-align: center;
 `
 
-export const GotoMain = styled.button`
+export const GotoMain = styled(Link)`
     width: 50%;
     padding: 15px;
     background-color: #009456;
@@ -44,4 +45,6 @@ export const GotoMain = styled.button`
     font-size: 20px;
     font-weight: 700;
     border-radius: 16px;
+    text-decoration: none;
+    text-align: center;
     `

@@ -10,8 +10,11 @@ export const LoadingScreenContainer = styled.div`
     overflow: hidden;
     box-sizing: border-box;
     height:calc(var(--vh, 1vh) * 100);
+    position: fixed;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 10000;
 `
 
 export const LottieContainer = styled.div`
-    width: 70%;
+    width: 50%;
     `

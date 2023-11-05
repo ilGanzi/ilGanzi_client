@@ -5,7 +5,7 @@ export const MainContainer = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 16px 20px 16px 20px;
+    padding: 0px 20px 16px 20px;
     overflow: hidden;
     box-sizing: border-box;
     height:calc(var(--vh, 1vh) * 100);
