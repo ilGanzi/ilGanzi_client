@@ -16,7 +16,7 @@ export default function MainPage(){
     const [isOpen,setIsOpen] = useState(false);
     const [isWatered, setIsWatered] = useState(false);
     const [isAdOpen,setIsAdOpen] = useState(false);
-    const [isLoading, setIsLoading] = useState(true);
+    const [isLoading, setIsLoading] = useState(false);
 
     const toggleSlide = () => {
         setIsOpen(true);

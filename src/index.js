@@ -1,8 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import App from './App';
-import Root from './pages/login/login';
 import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 import reportWebVitals from './reportWebVitals';
 import {
@@ -14,6 +12,7 @@ import setScreenHeight from './setScreenHeight';
 import LoginPage from './pages/login/login';
 import MainPage from './pages/main/main';
 import OnBorn from './pages/onborn/onborn';
+import Intro from './pages/intro/intro';
 
 const router = createBrowserRouter([
   {
@@ -28,6 +27,9 @@ const router = createBrowserRouter([
   },{
     path: "/born",
     element: <OnBorn />
+  },{
+    path: "/intro",
+    element: <Intro />
   }
 ]);
 
