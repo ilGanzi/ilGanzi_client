@@ -7,7 +7,11 @@ class UserApi {
                 email: email,
                 password: pw,
             };
-            const response = await axios.get(`/api/accounts/auth/`,loginData);
+            const response = await axios.post(`https://ilganziback-lvwun.run.goorm.site/api/accounts/auth/`,loginData);
+            const refToken = response.data.token.refresh();
+            localStorage.setItem('refToken',refToken);
+            console.log("login success");
+            window.location.href = '/';
         } catch(error){
             console.error(error)
         }
@@ -24,7 +28,7 @@ class UserApi {
         }
     }
 
-    static async deleteLogout(){
+    static async deleteLogout(email,pw){
         try{
             const logoutData = {
                 email: email,
@@ -46,3 +50,5 @@ class UserApi {
         }
     }
 }
+
+export default UserApi;

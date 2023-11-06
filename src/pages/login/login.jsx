@@ -1,6 +1,16 @@
 import * as styles from "./loginStyle";
+import UserApi from "../../utils/api";
+import { useState } from "react";
 
 export default function Login(){
+    const [email, setEmail] = useState("");
+    const [pw, setPw] = useState("");
+
+    const onClickLogin = (email,pw) => {
+        const loginEmail = `{email}@naver.com`
+        UserApi.postLogin(loginEmail,pw);
+    }
+
     return(
         <styles.Container>
             <styles.ServiceInfo>
@@ -10,12 +20,12 @@ export default function Login(){
             <styles.LoginInfo>
                 <styles.Classify>이메일 주소</styles.Classify>
                 <styles.EmailInputWrapper>
-                    <styles.EmailInput/>
+                    <styles.EmailInput onChange={(e) => setEmail(e.target.value)}/>
                     <styles.NaverMail>@ naver.com</styles.NaverMail>
                 </styles.EmailInputWrapper>
                 <styles.Classify>비밀번호</styles.Classify>
-                <styles.PassWordInput/>
-                <styles.LoginButton>LOGIN</styles.LoginButton>
+                <styles.PassWordInput type="password" onChange={(e) => setPw(e.target.value)}/>
+                <styles.LoginButton onClick={() => onClickLogin(email,pw)}>LOGIN</styles.LoginButton>
             </styles.LoginInfo>
             <styles.LoginOption>
                 <styles.ForgotId>아이디 찾기</styles.ForgotId>

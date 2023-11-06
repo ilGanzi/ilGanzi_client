@@ -46,7 +46,6 @@ export const EmailInputWrapper = styled.div`
     width: 100%;
     box-sizing: border-box;
     display: flex;
-    padding: 5px;
     font-size: 20px;
     border: none;
     border-bottom: 1px solid grey;
@@ -55,6 +54,8 @@ export const EmailInputWrapper = styled.div`
     margin-bottom: 20px;
 `
 export const EmailInput = styled.input`
+    font-size: 20px;
+    padding: 5px;
     width: 60%;
     border: none;
 `
