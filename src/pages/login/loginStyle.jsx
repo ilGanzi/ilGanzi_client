@@ -42,7 +42,7 @@ export const Classify = styled.div`
     font-weight: 700;
     `
 
-export const EmailInputWrapper = styled.div`
+export const InputWrapper = styled.div`
     width: 100%;
     box-sizing: border-box;
     display: flex;
@@ -69,7 +69,6 @@ export const PassWordInput = styled.input`
     box-sizing: border-box;
     width: 100%;
     border: none;
-    border-bottom: 1px solid grey;
     font-size: 20px;
 `
 

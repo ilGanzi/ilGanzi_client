@@ -1,15 +1,22 @@
 import * as styles from "./loginStyle";
 import UserApi from "../../utils/api";
 import { useState } from "react";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEye } from "@fortawesome/free-regular-svg-icons";
 
 export default function Login(){
     const [email, setEmail] = useState("");
     const [pw, setPw] = useState("");
+    const [showPw,setShowPw] = useState(false);
 
     const onClickLogin = (email,pw) => {
         const loginEmail = `{email}@naver.com`
         UserApi.postLogin(loginEmail,pw);
-    }
+    };
+    
+    const onClickEye = () => {
+        setShowPw(!showPw);
+    };
 
     return(
         <styles.Container>
@@ -19,12 +26,15 @@ export default function Login(){
             </styles.ServiceInfo>
             <styles.LoginInfo>
                 <styles.Classify>이메일 주소</styles.Classify>
-                <styles.EmailInputWrapper>
+                <styles.InputWrapper>
                     <styles.EmailInput onChange={(e) => setEmail(e.target.value)}/>
                     <styles.NaverMail>@ naver.com</styles.NaverMail>
-                </styles.EmailInputWrapper>
+                </styles.InputWrapper>
                 <styles.Classify>비밀번호</styles.Classify>
-                <styles.PassWordInput type="password" onChange={(e) => setPw(e.target.value)}/>
+                <styles.InputWrapper>
+                <styles.PassWordInput type= {showPw ? "": "password"} onChange={(e) => setPw(e.target.value)}/>
+                <FontAwesomeIcon icon={faEye} onClick={onClickEye}/>
+                </styles.InputWrapper>
                 <styles.LoginButton onClick={() => onClickLogin(email,pw)}>LOGIN</styles.LoginButton>
             </styles.LoginInfo>
             <styles.LoginOption>
