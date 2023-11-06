@@ -25,6 +25,14 @@ export const Signup_Title = styled.div`
     padding: 7px 16px 7px 20px;
     `
 
+export const EmailID_rule = styled.div`
+    width: 100%;
+    justify-content: flex-start;
+    font-weight: 700;
+    font-size: 25px;
+    padding: 0px 5px 5px 0px;
+    `
+
 export const Signup_mention = styled.div`
     width: 100%;
     font-family: AppleSDGothicNeoM00;
