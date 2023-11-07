@@ -34,8 +34,8 @@ export default function MainPage(){
     }
 
     useEffect(() => {
-        if (!userData.isAuthorized) {
-            console.log(userData);
+        if (!userData.value.isAuthorized) {
+            console.log(userData.value.isAuthorized);
             navigate('/login');
             console.log("err");
         }
