@@ -10,6 +10,7 @@ import Advertise from '../../components/advertise/advertise';
 import oneMoreWatering from '../../assets/onemorewatering.png';
 import { Link } from "react-router-dom";
 import LoadingScreen from '../../components/loading/loading';
+import { useSelector, userSelector } from "react-redux"
 
 export default function MainPage(){
     useSetScreenSize();
@@ -17,6 +18,7 @@ export default function MainPage(){
     const [isWatered, setIsWatered] = useState(false);
     const [isAdOpen,setIsAdOpen] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
+    const userData = useSelector((state) => state.user)
 
     const toggleSlide = () => {
         setIsOpen(true);
@@ -28,7 +30,7 @@ export default function MainPage(){
     const againWatering = () => {
         setIsAdOpen(true);
     }
-
+    console.log(userData);
     return(
         <styles.MainContainer style={{
             backgroundImage: `url(${backgroundImage})`,

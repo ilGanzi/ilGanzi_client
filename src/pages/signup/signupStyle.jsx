@@ -33,6 +33,17 @@ export const EmailID_rule = styled.div`
     padding: 0px 5px 5px 0px;
     `
 
+export const field_mention = styled.div`
+    width: 100%;
+    font-family: AppleSDGothicNeoM00;
+    justify-content: flex-start;
+    font-weight: 400;
+    font-style : normal;
+    font-size: 14.453px;
+    line-height: normal;
+    padding: 7px 14px 14px 7px;
+    `
+
 export const Signup_mention = styled.div`
     width: 100%;
     font-family: AppleSDGothicNeoM00;
@@ -46,7 +57,7 @@ export const Signup_mention = styled.div`
 
 export const NameInputSection = styled.div`
     width: 100%;
-    padding: 32px 20px 24px 20px;
+    padding: 32px 20px 12px 20px;
     flex-direction: column;
     display: flex
     justify-content: space-between;
