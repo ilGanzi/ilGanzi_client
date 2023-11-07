@@ -2,6 +2,7 @@ import axios from "axios";
 import { login } from "../store/reducer/user";
 import { useNavigate } from "react-router-dom";
 
+
 class UserApi {
     static async postLogin(email,pw){
         try{
