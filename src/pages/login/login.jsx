@@ -3,19 +3,34 @@ import UserApi from "../../utils/api";
 import { useState } from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye } from "@fortawesome/free-regular-svg-icons";
-import useUserDataStore from "../../utils/store/store";
+import { useDispatch, useSelector } from "react-redux";
+import { login } from "../../utils/store/reducer/user";
+import { useNavigate } from "react-router-dom";
 
 export default function Login(){
     const [email, setEmail] = useState("");
     const [pw, setPw] = useState("");
     const [showPw,setShowPw] = useState(false);
-    const {setLoginData} = useUserDataStore();
+    const dispatch = useDispatch();
+    const authtest = useSelector((state) => state.user)
+    const navigate = useNavigate();
 
-    const onClickLogin = (email,pw) => {
+    const onClickLogin = async (email,pw) => {
         const loginEmail = `${email}@naver.com`
-        const loginData = UserApi.postLogin(loginEmail,pw);
-        setLoginData(loginData);
-    };
+        try{
+        const loginData = await UserApi.postLogin(loginEmail,pw);
+        dispatch(login({
+            isAuthorized: true,
+            email: loginData.user.email,
+            password: loginData.user.password,
+            accessToken: loginData.token.access,
+        }));
+        console.log(authtest);
+        navigate('/')
+    } catch(error){
+        console.error(error)
+    }}
+    
 
     const onClickEye = () => {
         setShowPw(!showPw);

@@ -15,7 +15,7 @@ import OnBorn from './pages/onborn/onborn';
 import Intro from './pages/intro/intro';
 import Login from './pages/login/login';
 import { Provider as ReduxProvider } from 'react-redux';
-import { store } from './utils/store';
+import store from './utils/store/store';
 
 const router = createBrowserRouter([
   {
