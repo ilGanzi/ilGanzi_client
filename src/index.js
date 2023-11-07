@@ -14,6 +14,8 @@ import MainPage from './pages/main/main';
 import OnBorn from './pages/onborn/onborn';
 import Intro from './pages/intro/intro';
 import Login from './pages/login/login';
+import { Provider as ReduxProvider } from 'react-redux';
+import { store } from './utils/store';
 
 const router = createBrowserRouter([
   {
@@ -41,7 +43,9 @@ const router = createBrowserRouter([
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
+    <ReduxProvider store = {store}>
     <RouterProvider router = {router}/>
+    </ReduxProvider>
   </React.StrictMode>
 );
 

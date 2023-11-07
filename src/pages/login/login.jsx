@@ -3,17 +3,20 @@ import UserApi from "../../utils/api";
 import { useState } from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye } from "@fortawesome/free-regular-svg-icons";
+import useUserDataStore from "../../utils/store/store";
 
 export default function Login(){
     const [email, setEmail] = useState("");
     const [pw, setPw] = useState("");
     const [showPw,setShowPw] = useState(false);
+    const {setLoginData} = useUserDataStore();
 
     const onClickLogin = (email,pw) => {
-        const loginEmail = `{email}@naver.com`
-        UserApi.postLogin(loginEmail,pw);
+        const loginEmail = `${email}@naver.com`
+        const loginData = UserApi.postLogin(loginEmail,pw);
+        setLoginData(loginData);
     };
-    
+
     const onClickEye = () => {
         setShowPw(!showPw);
     };
