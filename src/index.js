@@ -17,6 +17,11 @@ import Login from './pages/login/login';
 import { Provider as ReduxProvider } from 'react-redux';
 import store from './utils/store/store';
 
+if (!localStorage.getItem('visited')) {
+  // 최초 방문자라면 플래그 설정
+  localStorage.setItem('visited', 'true');
+}
+
 const router = createBrowserRouter([
   {
     path: "/",
