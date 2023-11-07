@@ -2,6 +2,7 @@
 import axios from 'axios';
 import store from '../store';
 import { useDispatch, useSelector} from 'react-redux';
+import { login, setAccessToken } from '../store/reducer/user';
 
 
 const authApi = axios.create({
@@ -9,7 +10,7 @@ const authApi = axios.create({
   timeout: 5000,
 });
 
-// 요청 인터셉터 설정
+// 토큰 넣어서 보내는 요청 인터셉터 설정
 authApi.interceptors.request.use(async (config) => {
   const accessToken = useSelector((state) => state.user.accessToken)
   if (accessToken) {
@@ -21,7 +22,6 @@ authApi.interceptors.request.use(async (config) => {
 });
 
 // 응답 인터셉터 설정
-// 응답 인터셉터 설정
 authApi.interceptors.response.use(
     response => response, //그대로 response로 내보냄
     async error => {
@@ -29,15 +29,18 @@ authApi.interceptors.response.use(
         const refreshToken = localStorage.getItem('refToken');
       if (error.response.status === 401 && !originalRequest._retry && refreshToken) {
         originalRequest._retry = true;
-  
         try {
           // 리프레시 토큰으로 새로운 엑세스 토큰 발급 받기
-          const refreshResponse = await noAuthApi.post('/accounts/auth/refresh/', {
+          const refreshResponse = await noAuthApi.post('/api/accounts/auth/refresh/', {
             refresh: refreshToken
           });
           
           // 리덕스 스토어에 엑세스 토큰 저장
-          store.dispatch(saveResponseData(refreshResponse.data.access));
+          const dispatch = useDispatch();
+          dispatch(setAccessToken({
+            accessToken: refreshResponse.data.access,
+            }));
+
           alert(refreshResponse.data)
           // 변경된 토큰을 요청 헤더에 추가하여 재시도
           originalRequest.headers.Authorization = `Bearer ${refreshResponse.data.access}`;
@@ -58,7 +61,10 @@ authApi.interceptors.response.use(
           });
   
           // 리덕스 스토어에 엑세스 토큰 저장
-          store.dispatch(saveResponseData(refreshResponse.data.access));
+          const dispatch = useDispatch();
+          dispatch(setAccessToken({
+            accessToken: refreshResponse.data.access,
+            }));
   
           // 변경된 토큰으로 원래 요청 재시도
           originalRequest.headers.Authorization = `Bearer ${refreshResponse.data.access}`;
@@ -74,7 +80,7 @@ authApi.interceptors.response.use(
   );
 
 const noAuthApi = axios.create({
-    baseURL: 'https://port-0-hackbackend-20zynm2mljmm4yrc.sel4.cloudtype.app', // API 기본 URL 설정
+    baseURL: 'https://ilganziback-lvwun.run.goorm.site', // API 기본 URL 설정
     timeout: 5000,
   });
 

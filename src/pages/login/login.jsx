@@ -6,6 +6,7 @@ import { faEye } from "@fortawesome/free-regular-svg-icons";
 import { useDispatch, useSelector } from "react-redux";
 import { login } from "../../utils/store/reducer/user";
 import { useNavigate } from "react-router-dom";
+import { noAuthApi } from "../../utils/interceptor/axiosInterceptor";
 
 export default function Login(){
     const [email, setEmail] = useState("");

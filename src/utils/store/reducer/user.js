@@ -18,10 +18,13 @@ export const user = createSlice({
         },
         logout: (state) => {
             state.value = initialStateValue;
-        }
+        },
+        setAccessToken: (state, action) => {
+            state.value.accessToken = action.payload.accessToken;
+        },
     }
 });
 
 export default user.reducer;
 
-export const { login, saveUserInfo, logout } = user.actions;
+export const { login, setAccessToken, logout } = user.actions;
