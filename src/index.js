@@ -9,10 +9,13 @@ import {
 } from "react-router-dom";
 import SettingPage from './pages/setting/setting';
 import setScreenHeight from './setScreenHeight';
-import LoginPage from './pages/login/login';
+import LoginInf from './pages/logininf/logininf';
 import MainPage from './pages/main/main';
 import OnBorn from './pages/onborn/onborn';
 import Intro from './pages/intro/intro';
+import Login from './pages/login/login';
+import { Provider as ReduxProvider } from 'react-redux';
+import store from './utils/store/store';
 
 const router = createBrowserRouter([
   {
@@ -22,8 +25,11 @@ const router = createBrowserRouter([
     path: "/settings",
     element: <SettingPage />,
   },{
+    path: "/logininf",
+    element: <LoginInf />,
+  },{
     path: "/login",
-    element: <LoginPage />,
+    element: <Login />
   },{
     path: "/born",
     element: <OnBorn />
@@ -37,7 +43,9 @@ const router = createBrowserRouter([
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
+    <ReduxProvider store = {store}>
     <RouterProvider router = {router}/>
+    </ReduxProvider>
   </React.StrictMode>
 );
 
