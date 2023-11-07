@@ -15,12 +15,11 @@ import OnBorn from './pages/onborn/onborn';
 import Intro from './pages/intro/intro';
 import Login from './pages/login/login';
 import { Provider as ReduxProvider } from 'react-redux';
-import store from './utils/store/store';
+import store from './utils/store/index';
+import { PersistGate } from 'redux-persist/integration/react';
+import {persistStore} from 'redux-persist';
 
-if (!localStorage.getItem('visited')) {
-  // 최초 방문자라면 플래그 설정
-  localStorage.setItem('visited', 'true');
-}
+export let persistor = persistStore(store);
 
 const router = createBrowserRouter([
   {
@@ -49,7 +48,9 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <ReduxProvider store = {store}>
-    <RouterProvider router = {router}/>
+      <PersistGate loading={null} persistor={persistor}>
+        <RouterProvider router = {router}/>
+      </PersistGate>
     </ReduxProvider>
   </React.StrictMode>
 );

@@ -5,12 +5,13 @@ import { faBars } from "@fortawesome/free-solid-svg-icons";
 import backgroundImage from '../../assets/mainBackground.png'
 import plant from '../../assets/plant.png'
 import Sidebar from '../../components/sidebar/sidebar';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Advertise from '../../components/advertise/advertise';
 import oneMoreWatering from '../../assets/onemorewatering.png';
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import LoadingScreen from '../../components/loading/loading';
 import { useSelector } from "react-redux"
+
 
 export default function MainPage(){
     useSetScreenSize();
@@ -19,6 +20,7 @@ export default function MainPage(){
     const [isAdOpen,setIsAdOpen] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
     const userData = useSelector((state) => state.user)
+    const navigate = useNavigate();
 
     const toggleSlide = () => {
         setIsOpen(true);
@@ -30,8 +32,16 @@ export default function MainPage(){
     const againWatering = () => {
         setIsAdOpen(true);
     }
-    console.log(userData);
-    return(
+
+    useEffect(() => {
+        if (!userData.isAuthorized) {
+            console.log(userData);
+            navigate('/login');
+            console.log("err");
+        }
+    }, []);
+
+        return(
         <styles.MainContainer style={{
             backgroundImage: `url(${backgroundImage})`,
             backgroundSize: 'cover',

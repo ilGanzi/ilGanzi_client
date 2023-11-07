@@ -26,6 +26,7 @@ export default function Login(){
             password: loginData.user.password,
             accessToken: loginData.token.access,
         }));
+        console.log('damn')
         console.log(authtest);
         navigate('/')
     } catch(error){
