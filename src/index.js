@@ -16,6 +16,7 @@ import Intro from './pages/intro/intro';
 import Login from './pages/login/login';
 import { Provider as ReduxProvider } from 'react-redux';
 import store from './utils/store/index';
+import Signup from './pages/signup/signup';
 import { PersistGate } from 'redux-persist/integration/react';
 import {persistStore} from 'redux-persist';
 
@@ -40,6 +41,9 @@ const router = createBrowserRouter([
   },{
     path: "/intro",
     element: <Intro />
+  }, {
+    path: "/signup",
+    element: <Signup />
   }
 ]);
 
