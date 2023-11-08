@@ -22,9 +22,7 @@ export default function Login(){
         const loginData = await UserApi.postLogin(loginEmail,pw);
         dispatch(login({
             isAuthorized: true,
-            email: loginData.user.email,
-            password: loginData.user.password,
-            accessToken: loginData.token.access,
+            refreshToken: loginData.token.access,
         }));
         console.log('damn')
         console.log(authtest);

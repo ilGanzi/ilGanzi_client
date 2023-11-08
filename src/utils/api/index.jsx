@@ -1,7 +1,7 @@
 import axios from "axios";
-import { login } from "../store/reducer/user";
+import { login, setAccessToken } from "../store/reducer/user";
 import { useNavigate } from "react-router-dom";
-
+import { noAuthApi } from "../interceptor/axiosInterceptor";
 
 class UserApi {
     static async postLogin(email,pw){
@@ -10,11 +10,9 @@ class UserApi {
                 email: email,
                 password: pw,
             };
-            const response = await axios.post(`https://ilganziback-lvwun.run.goorm.site/api/accounts/auth/`,loginData);
-            const refToken = response.data.token.refresh;
-
-            //localStorage에 리프레시토큰
-            localStorage.setItem('refToken',refToken);
+            const response = await noAuthApi.post(`https://ilganziback-lvwun.run.goorm.site/api/accounts/auth/`,loginData);
+            const accessToken = response.data.token.access
+            axios.defaults.headers.common['Authorization'] = `Bearer ${accessToken}`
             console.log("login success");
             return response.data
         } catch(error){

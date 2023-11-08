@@ -19,8 +19,10 @@ import store from './utils/store/index';
 import Signup from './pages/signup/signup';
 import { PersistGate } from 'redux-persist/integration/react';
 import {persistStore} from 'redux-persist';
+import axios from 'axios';
 
 export let persistor = persistStore(store);
+axios.defaults.withCredentials = true;
 
 const router = createBrowserRouter([
   {
