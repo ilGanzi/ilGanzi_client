@@ -19,7 +19,7 @@ export default function MainPage(){
     const [isOpen,setIsOpen] = useState(false);
     const [isWatered, setIsWatered] = useState(false);
     const [isAdOpen,setIsAdOpen] = useState(false);
-    const [isLoading, setIsLoading] = useState(false);
+    const [isLoading, setIsLoading] = useState(true);
     const userData = useSelector((state) => state.user)
     const navigate = useNavigate();
 
@@ -41,6 +41,7 @@ export default function MainPage(){
             const info = await UserApi.getUser();
             setInfo(info);
             console.log(info);
+            setIsLoading(false);
         } catch(error){
             console.error(error);
         }

@@ -95,7 +95,6 @@ export default function SettingPage() {
     const register = await UserApi.postRegister(loginEmail,pw,phoneNum);
     dispatch(login({
         isAuthorized: true,
-        refreshToken: register.token.refresh,
     }));
     alert("회원가입이 완료되었습니다.")
     console.log(register.data);
