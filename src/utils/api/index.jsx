@@ -36,13 +36,11 @@ class UserApi {
         }
     };
 
-    static async deleteLogout(email,pw){
+    static async deleteLogout(){
         try{
-            const logoutData = {
-                email: email,
-                password: pw
-            };
-            const response = await apicall.delete(`/api/accounts/auth/`)
+            const response = await apicall.delete(`/api/accounts/auth/`);
+            delete axios.defaults.headers.common['Authorization'];
+
         } catch(error){
             console.error(error);
         }
