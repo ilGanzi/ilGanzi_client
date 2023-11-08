@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { login } from "../../utils/store/reducer/user";
 import { useNavigate } from "react-router-dom";
 import { noAuthApi } from "../../utils/interceptor/axiosInterceptor";
+import LoadingScreen from "../../components/loading/loading";
 
 export default function Login(){
     const [email, setEmail] = useState("");
@@ -15,19 +16,20 @@ export default function Login(){
     const dispatch = useDispatch();
     const authtest = useSelector((state) => state.user)
     const navigate = useNavigate();
+    const [isLoading,setIsLoading] = useState(false);
 
     const onClickLogin = async (email,pw) => {
+        setIsLoading(true)
         const loginEmail = `${email}@naver.com`
         try{
         const loginData = await UserApi.postLogin(loginEmail,pw);
         dispatch(login({
             isAuthorized: true,
-            email: loginData.user.email,
-            password: loginData.user.password,
-            accessToken: loginData.token.access,
         }));
+        localStorage.setItem("refToken",loginData.token.refresh)
         console.log('damn')
         console.log(authtest);
+        setIsLoading(false)
         navigate('/')
     } catch(error){
         console.error(error)
@@ -60,8 +62,9 @@ export default function Login(){
             <styles.LoginOption>
                 <styles.ForgotId>아이디 찾기</styles.ForgotId>
                 <styles.ForgotPw>비밀번호 찾기</styles.ForgotPw>
-                <styles.Signup>회원가입</styles.Signup>
+                <styles.Signup to={`/signup`}>회원가입</styles.Signup>
             </styles.LoginOption>
+            {isLoading && <LoadingScreen/>}
         </styles.Container>
     );
 };

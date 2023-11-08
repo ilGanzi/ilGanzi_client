@@ -11,6 +11,7 @@ import oneMoreWatering from '../../assets/onemorewatering.png';
 import { useNavigate } from "react-router-dom";
 import LoadingScreen from '../../components/loading/loading';
 import { useSelector } from "react-redux"
+import UserApi from '../../utils/api';
 
 
 export default function MainPage(){
@@ -18,7 +19,7 @@ export default function MainPage(){
     const [isOpen,setIsOpen] = useState(false);
     const [isWatered, setIsWatered] = useState(false);
     const [isAdOpen,setIsAdOpen] = useState(false);
-    const [isLoading, setIsLoading] = useState(false);
+    const [isLoading, setIsLoading] = useState(true);
     const userData = useSelector((state) => state.user)
     const navigate = useNavigate();
 
@@ -28,16 +29,33 @@ export default function MainPage(){
 
     const onClickWatering = () => {
         setIsWatered(true);
-    }
+    };
+
     const againWatering = () => {
         setIsAdOpen(true);
-    }
+    };
+    
+    const[info,setInfo] = useState({});
+    const userInfo = async () => {
+        try{
+            const info = await UserApi.getUser();
+            setInfo(info);
+            console.log(info);
+            setIsLoading(false);
+        } catch(error){
+            console.error(error);
+        }
+    };
+
+
 
     useEffect(() => {
         if (!userData.value.isAuthorized) {
             console.log(userData.value.isAuthorized);
             navigate('/login');
             console.log("err");
+        }else{
+            userInfo();
         }
     }, []);
 
@@ -47,12 +65,12 @@ export default function MainPage(){
             backgroundSize: 'cover',
         }}>
             <styles.HeaderContainer>
-                <styles.TreeInf>새싹이의 지구 LV.1</styles.TreeInf>
+                <styles.TreeInf>금쪽이의 지구 LV.1</styles.TreeInf>
                 <FontAwesomeIcon icon={faBars} onClick={toggleSlide}/>
                 <Sidebar isOpen={isOpen} setIsOpen={setIsOpen}/>
             </styles.HeaderContainer>
             <styles.WateringInf>
-                 💧물 주기 (1/10)
+                 💧물 주기 {info.watered}
             </styles.WateringInf>
             { isWatered ?
             <styles.OneMoreWateringSection>
