@@ -24,6 +24,7 @@ export default function Login(){
             isAuthorized: true,
             refreshToken: loginData.token.access,
         }));
+        localStorage.setItem("refToken",loginData.token.refresh)
         console.log('damn')
         console.log(authtest);
         navigate('/')

@@ -50,7 +50,7 @@ class UserApi {
 
     static async getUser() {
         try{
-            const response = await apicall.post(`/api/accounts/user/`);
+            const response = await apicall.get(`/api/accounts/user/`);
             return response.data
         } catch(error){
             console.error(error);

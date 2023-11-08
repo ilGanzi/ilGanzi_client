@@ -1,7 +1,6 @@
 // axiosInterceptor.js
 import axios from 'axios';
 import store from '../store';
-import { useDispatch, useSelector} from 'react-redux';
 import { login, setAccessToken } from '../store/reducer/user';
 
 
@@ -22,8 +21,7 @@ apicall.interceptors.response.use(
     response => response, //그대로 response로 내보냄
     async error => {
         const originalRequest = error.config;
-        const userData = useSelector((state) => state.user)
-        const refreshToken = userData.value.refreshToken        
+        const refreshToken = localStorage.getItem("refToken")
 
       if (error.response.status === 401 && !originalRequest._retry && refreshToken) {
         originalRequest._retry = true;
@@ -37,6 +35,7 @@ apicall.interceptors.response.use(
           
           // 변경된 토큰을 요청 헤더에 추가하여 재시도
           originalRequest.headers.Authorization = `Bearer ${accessToken}`;
+          console.log("401에러로 재요청")
           return apicall(originalRequest);
         } catch (refreshError) {
             console.log("401 갱신 실패")
