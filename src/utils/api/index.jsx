@@ -29,6 +29,8 @@ class UserApi {
                 phonenum: phonenum,
             };
             const response = await apicall.get(`/api/accounts/register/`, registerData)
+            const accessToken = response.data.token.access
+            axios.defaults.headers.common['Authorization'] = `Bearer ${accessToken}`
         } catch(error){
             console.error(error);
         }
@@ -41,34 +43,10 @@ class UserApi {
                 password: pw
             };
             const response = await apicall.delete(`/api/accounts/auth/`)
-            const dispatch = useDispatch();
-            dispatch(login({
-                isAuthorized: false,
-                refreshToken: "",
-            }));
         } catch(error){
             console.error(error);
         }
     }
-
-    static async postRefresh() {
-        try{
-            const authData = useSelector((state) => state.user)
-            const refreshToken = userData.value.refreshToken        
- 
-            const tokenData = {
-                refresh: refreshToken
-            };
-            const response = await axios.post(`/api/accounts/auth/refresh/`,tokenData);
-            const accessToken = response.data.access;
-
-            axios.defaults.headers.common['Authorization'] = `Bearer ${accessToken}`
-
-        } catch(error){
-            console.error(error);
-        }
-    };
-
 
     static async getUser() {
         try{

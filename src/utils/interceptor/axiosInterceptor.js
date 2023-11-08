@@ -5,7 +5,7 @@ import { useDispatch, useSelector} from 'react-redux';
 import { login, setAccessToken } from '../store/reducer/user';
 
 
-const authApi = axios.create({
+const apicall = axios.create({
   baseURL: 'https://ilganziback-lvwun.run.goorm.site', // API 기본 URL 설정
   timeout: 5000,
 });
@@ -32,11 +32,11 @@ apicall.interceptors.response.use(
           const refreshResponse = await apicall.post('/api/accounts/auth/refresh/', {
             refresh: refreshToken
           });
-          
+          const accessToken = refreshResponse.data.access
           axios.defaults.headers.common['Authorization'] = `Bearer ${accessToken}`
           
           // 변경된 토큰을 요청 헤더에 추가하여 재시도
-          originalRequest.headers.Authorization = `Bearer ${refreshResponse.data.access}`;
+          originalRequest.headers.Authorization = `Bearer ${accessToken}`;
           return apicall(originalRequest);
         } catch (refreshError) {
             console.log("401 갱신 실패")
@@ -52,13 +52,12 @@ apicall.interceptors.response.use(
           const refreshResponse = await apicall.post('/api/accounts/auth/refresh/', {
             refresh: refreshToken
           });
-          
+          const accessToken = refreshResponse.data.access
           axios.defaults.headers.common['Authorization'] = `Bearer ${accessToken}`
           
           // 변경된 토큰을 요청 헤더에 추가하여 재시도
-          originalRequest.headers.Authorization = `Bearer ${refreshResponse.data.access}`;
+          originalRequest.headers.Authorization = `Bearer ${accessToken}`;
           return apicall(originalRequest);
-          
         } catch (refreshError) {
           console.log('403 갱신 실패');
           return Promise.reject(refreshError);
@@ -82,4 +81,4 @@ noAuthApi.interceptors.response.use(
   );
   
   
-export {apicall};
+export { apicall };

@@ -2,6 +2,11 @@ import { useState } from 'react';
 import * as styles from './signupStyle';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye } from "@fortawesome/free-regular-svg-icons";
+import UserApi from '../../utils/api';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { login } from '../../utils/store/reducer/user';
+
 
 export default function SettingPage() {
   const [Name, setName] = useState("");
@@ -11,7 +16,6 @@ export default function SettingPage() {
   const [IDError, setIDError] = useState(false);
   const [IPWError, setIPWError] = useState(false);
   const [CPWError, setCPWError] = useState(false);
-  const [regexError, setRegexError] = useState(false);
   const [passwordError, setPasswordError] = useState(false);
 
   const [nameTouched, setNameTouched] = useState(false);
@@ -20,6 +24,8 @@ export default function SettingPage() {
   const [cpwTouched, setCpwTouched] = useState(false);
 
   const [showIPW, setShowIPW] = useState(false);
+
+  const navigate = useNavigate();
 
   const handleShowIPW = () => {
     setShowIPW(!showIPW);
@@ -31,7 +37,7 @@ export default function SettingPage() {
     setShowCPW(!showCPW);
   };
 
-  const isFormValid = !IDError && !IPWError && !CPWError && !regexError && !passwordError &&
+  const isFormValid = !IDError && !IPWError && !CPWError && !passwordError &&
     (nameTouched || idTouched || ipwTouched || cpwTouched) &&
     Name && ID && IPW && CPW;
   
@@ -82,17 +88,21 @@ export default function SettingPage() {
     console.log(CPW);
   };
 
-  const handleFinishButtonClick = () => {
-    if (!nameTouched || !idTouched || !ipwTouched || !cpwTouched) {
-      return;
-    }
-
-    if (!Name || !ID || !IPW || !CPW) {
-      setRegexError(true);
-    } else {
-      setRegexError(false);
-    }
-  };
+  const dispatch = useDispatch();
+  const onSubmitSignup = async (email,pw, phoneNum) => {
+    const loginEmail = `${email}@naver.com`
+    try{
+    const register = await UserApi.postRegister(loginEmail,pw,phoneNum);
+    dispatch(login({
+        isAuthorized: true,
+        refreshToken: register.token.refresh,
+    }));
+    alert("회원가입이 완료되었습니다.")
+    console.log(register.data);
+    navigate('/settings')
+} catch(error){
+    console.error(error)
+}}
 
   return (
     <styles.SettingContainer>
@@ -100,10 +110,10 @@ export default function SettingPage() {
         <styles.Signup_Title>회원가입</styles.Signup_Title>
         <styles.Signup_mention>회원가입 확인 및 가입을 진행합니다.</styles.Signup_mention>
         <styles.NameInputSection>
-          <styles.field_mention>이름</styles.field_mention>
+          <styles.field_mention>전화번호(-를 포함하지 않습니다)</styles.field_mention>
           <styles.NameInput
             onChange={handleNameChange}
-            placeholder='이름 입력'
+            placeholder='전화번호'
           />
         </styles.NameInputSection>
         <styles.emailID_InputSection>
@@ -111,7 +121,7 @@ export default function SettingPage() {
           <styles.EmailInputWrapper>
           <styles.EmailID_Input
             onChange={handleEmailIDChange}
-            placeholder='Email'
+            placeholder='이메일'
           />
           <styles.NavermailAd>@ naver.com</styles.NavermailAd>
           </styles.EmailInputWrapper>
@@ -167,18 +177,13 @@ export default function SettingPage() {
             </div>
           )}
         </styles.PassWord_CheckSection>
-        {regexError && (
-          <div style={{ color: 'red', marginTop: '10px' }}>
-            모든 필드를 채워주세요.
-          </div>
-        )}
         <styles.ButtonWrapper>
         <styles.FinishButton
-          onClick={handleFinishButtonClick}
+          onClick={onSubmitSignup(ID,IPW,Name)}
           style={{
             marginLeft: '20px',
-            backgroundColor: regexError || passwordError || !isFormValid ? '#e9e9e9' : '#009456',
-            color: regexError || passwordError || !isFormValid ? '#777777' : 'white',
+            backgroundColor: passwordError || !isFormValid ? '#e9e9e9' : '#009456',
+            color: passwordError || !isFormValid ? '#777777' : 'white',
             cursor: isFormValid ? 'pointer' : 'not-allowed',
           }}
         >
