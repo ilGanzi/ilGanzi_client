@@ -178,7 +178,7 @@ export default function SettingPage() {
         </styles.PassWord_CheckSection>
         <styles.ButtonWrapper>
         <styles.FinishButton
-          onClick={onSubmitSignup(ID,IPW,Name)}
+          onClick={() => onSubmitSignup(ID,IPW,Name)}
           style={{
             marginLeft: '20px',
             backgroundColor: passwordError || !isFormValid ? '#e9e9e9' : '#009456',
