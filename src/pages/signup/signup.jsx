@@ -8,7 +8,6 @@ export default function SettingPage() {
   const [ID, setID] = useState("");
   const [IPW, setIPW] = useState("");
   const [CPW, setCPW] = useState("");
-  const [nameError, setNameError] = useState(false);
   const [IDError, setIDError] = useState(false);
   const [IPWError, setIPWError] = useState(false);
   const [CPWError, setCPWError] = useState(false);
@@ -32,19 +31,13 @@ export default function SettingPage() {
     setShowCPW(!showCPW);
   };
 
-  const isFormValid = !nameError && !IDError && !IPWError && !CPWError && !regexError && !passwordError &&
+  const isFormValid = !IDError && !IPWError && !CPWError && !regexError && !passwordError &&
     (nameTouched || idTouched || ipwTouched || cpwTouched) &&
     Name && ID && IPW && CPW;
-  const handleNameChange = (e) => {
-    const regex = /^[a-zA-Z가-힣\s]{2,}$/;
-    if (regex.test(e.target.value)) {
+  
+    const handleNameChange = (e) => {
       setName(e.target.value);
-      setNameError(false);
-    } else {
-      setNameError(true);
-    }
-    setNameTouched(true);
-  };
+  }
 
   const handleEmailIDChange = (e) => {
     const regex = /^[a-zA-Z0-9_\-]{5,20}$/;
@@ -86,6 +79,7 @@ export default function SettingPage() {
       setCPWError(true);
     }
     setCpwTouched(true);
+    console.log(CPW);
   };
 
   const handleFinishButtonClick = () => {
@@ -106,64 +100,67 @@ export default function SettingPage() {
         <styles.Signup_Title>회원가입</styles.Signup_Title>
         <styles.Signup_mention>회원가입 확인 및 가입을 진행합니다.</styles.Signup_mention>
         <styles.NameInputSection>
-          <styles.field_mention>귀하의 성함을 입력해주세요.</styles.field_mention>
+          <styles.field_mention>이름</styles.field_mention>
           <styles.NameInput
             onChange={handleNameChange}
             placeholder='이름 입력'
-            style={{
-              backgroundColor: 'white',
-              border: (nameError && nameTouched) ? '3px solid red' : (nameTouched ? '1px solid black' : '1px solid gray'),
-            }}
           />
         </styles.NameInputSection>
         <styles.emailID_InputSection>
-        <styles.field_mention>아이디는 네이버 아이디와 같은 아이디로 입력해주세요.</styles.field_mention>
-
+        <styles.field_mention>아이디(네이버 메일주소만 가능해요)</styles.field_mention>
+          <styles.EmailInputWrapper>
           <styles.EmailID_Input
             onChange={handleEmailIDChange}
-            placeholder='ID'
-            style={{
-              backgroundColor: 'white',
-              border: (IDError && idTouched) ? '3px solid red' : (idTouched ? '1px solid black' : '1px solid gray'),
-            }}
+            placeholder='Email'
           />
-
+          <styles.NavermailAd>@ naver.com</styles.NavermailAd>
+          </styles.EmailInputWrapper>
           {IDError && (
             <div style={{ color: '#EA383F', fontFamily: "Pretendard", fontSize: '12.5px', fontWeight: 'bold', lineHeight: '22px', letterSpacing: '-0.14px' }}>
-              5~20자의 영문 소문자, 숫자와 특수기호(_),(-)를 사용할 수 있습니다.
+              5~20자의 영문 소문자, 숫자와 특수기호를 사용할 수 있습니다.
             </div>
           )}
         </styles.emailID_InputSection>
         <styles.PassWord_InputSection>
+          <styles.field_mention>비밀번호</styles.field_mention>
+          <styles.PasswordInputWrapper
+          style={{
+            backgroundColor: 'white',
+            border: (IPWError && ipwTouched) ? '3px solid red' : (ipwTouched ? '1px solid black' : '1px solid gray'),
+          }}>
           <styles.PassWord_Input
             onChange={handlePasswordInput}
             type={showIPW ? "text" : "password"}
             placeholder='비밀번호 입력'
-            style={{
-              backgroundColor: 'white',
-              border: (IPWError && ipwTouched) ? '3px solid red' : (ipwTouched ? '1px solid black' : '1px solid gray'),
-            }}
           />
-          <FontAwesomeIcon icon={faEye} onClick={handleShowIPW} />
+          <FontAwesomeIcon icon={faEye} onClick={handleShowIPW} 
+          style={{fontSize: '20px'}}/>
+          </styles.PasswordInputWrapper>
           {ipwTouched && (IPW.length < 8 || !(/^(?=.*[a-zA-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/.test(IPW))) && (
             <div style={{ color: 'red' }}>
-              {IPW.length < 8 ? '비밀번호는 8자 이상이어야 합니다.' : '비밀번호가 문자, 숫자, 기호를 조합해보세요.'}
+              {IPW.length < 8 ? '비밀번호는 8자 이상이어야 합니다.' : '비밀번호에 문자, 숫자, 기호를 조합해야 합니다.'}
             </div>
-
-          )}
-        </styles.PassWord_InputSection>
+              )}
+          </styles.PassWord_InputSection>
 
         <styles.PassWord_CheckSection>
+          <styles.field_mention>비밀번호 확인</styles.field_mention>
+        <styles.PasswordInputWrapper
+          style={{
+            backgroundColor: 'white',
+            border: (IPWError && ipwTouched) ? '3px solid red' : (ipwTouched ? '1px solid black' : '1px solid gray'),
+          }}>
           <styles.PassWord_Check
             onChange={handlePasswordCheck}
             type={showCPW ? "text" : "password"}
             placeholder='비밀번호 재입력'
             style={{
-              backgroundColor: 'white',
-              border: (CPWError && cpwTouched) ? '3px solid red' : (cpwTouched ? '1px solid black' : '1px solid gray'),
-            }}
+              backgroundColor: 'white',}}
           />
-          <FontAwesomeIcon icon={faEye} onClick={handleShowCPW} /> 
+          <FontAwesomeIcon icon={faEye}    onClick={handleShowCPW}
+          style={{fontSize: '20px'}} 
+            /> 
+            </styles.PasswordInputWrapper>
           {passwordError && CPW !== "" && (
             <div style={{ color: 'red' }}>
               비밀번호가 일치하지 않습니다.
@@ -175,6 +172,7 @@ export default function SettingPage() {
             모든 필드를 채워주세요.
           </div>
         )}
+        <styles.ButtonWrapper>
         <styles.FinishButton
           onClick={handleFinishButtonClick}
           style={{
@@ -186,6 +184,7 @@ export default function SettingPage() {
         >
           확인
         </styles.FinishButton>
+        </styles.ButtonWrapper>
       </styles.SettingWrapper>
     </styles.SettingContainer>
   );
