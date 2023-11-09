@@ -35,6 +35,15 @@ class UserApi {
         }
     };
 
+    static async postTreename(){
+        try{
+            const response = await apicall.post(`/api/accounts/update/treename/`);
+        } catch(error){
+            console.error(error);
+            alert('나무 이름 설정에 실패했습니다. 인터넷 연결을 확인하고 다시 시도해 주세요.')
+        }
+    };
+
     static async deleteLogout(){
         try{
             const response = await apicall.delete(`/api/accounts/auth/`);

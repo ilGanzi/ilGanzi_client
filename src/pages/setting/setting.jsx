@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useSetScreenSize } from '../../setScreenHeight';
 import * as styles from './settingstyle'
+import UserApi from '../../utils/api';
 
 export default function SettingPage(){
     useSetScreenSize();
@@ -18,6 +19,15 @@ export default function SettingPage(){
         setRegexError(true);
       }
     };
+
+    const onClickFinish = async(treeName) =>{
+        try{
+            const data = await UserApi.postTreename(treeName)
+        } catch(error){
+            console.error(error);
+            console.log('qwrqwrqwr')
+        }
+    }
     
 
     return(
@@ -43,7 +53,9 @@ export default function SettingPage(){
                         style={{
                             backgroundColor: regexError ? '#e9e9e9' : '#009456',
                             color: regexError ? '#777777' : 'white'
-                    }}>완료</styles.FinishButton>
+                         }}
+                        onClick={() => onClickFinish(treeName)}
+                    >완료</styles.FinishButton>
         </styles.SettingContainer>
     );
 }
