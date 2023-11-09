@@ -7,11 +7,9 @@ import { useNavigate } from "react-router-dom";
 
 export default function Login(){
     const [email, setEmail] = useState("");
-    const dispatch = useDispatch();
-    const authtest = useSelector((state) => state.user)
     const navigate = useNavigate();
 
-    const onClickFindID = async (email) => { //이 부분 API 기능에 맞게 수정 부탁드리겠습니다.
+    const onClickFindPw = async (email) => { //이 부분 API 기능에 맞게 수정 부탁드리겠습니다.
        const loginEmail = `${email}@naver.com`
         try{
         const loginData = await UserApi.postFindPw(loginEmail);
@@ -34,7 +32,7 @@ export default function Login(){
                     <styles.NaverMail>@naver.com</styles.NaverMail>
                 </styles.InputWrapper>
                 <styles.FindIDNotice>메일이 오지 않을 경우, 스팸함을 확인해주세요.</styles.FindIDNotice>
-                <styles.FindIDButton onClick={() => onClickFindID(email)}>비밀번호 찾기</styles.FindIDButton>
+                <styles.FindIDButton onClick={() => onClickFindPw(email)}>비밀번호 찾기</styles.FindIDButton>
             </styles.LoginInfo>
 
         </styles.Container>
