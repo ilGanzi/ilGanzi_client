@@ -17,6 +17,8 @@ import Login from './pages/login/login';
 import { Provider as ReduxProvider } from 'react-redux';
 import store from './utils/store/index';
 import Signup from './pages/signup/signup';
+import FindID from './pages/FindID/findID';
+import FindPW from './pages/FindPW/findPW';
 import { PersistGate } from 'redux-persist/integration/react';
 import {persistStore} from 'redux-persist';
 import axios from 'axios';
@@ -46,6 +48,12 @@ const router = createBrowserRouter([
   }, {
     path: "/signup",
     element: <Signup />
+  }, {
+    path: "/findID",
+    element: <FindID />
+  }, {
+    path: "/findPW",
+    element: <FindPW />
   }
 ]);
 
