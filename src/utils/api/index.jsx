@@ -3,7 +3,6 @@ import { login, setAccessToken } from "../store/reducer/user";
 import { useNavigate } from "react-router-dom";
 import { apicall } from "../interceptor/axiosInterceptor";
 import { useDispatch, useSelector } from "react-redux";
-
 class UserApi {
     static async postLogin(email,pw){
         try{

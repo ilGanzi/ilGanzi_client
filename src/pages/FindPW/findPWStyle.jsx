@@ -26,15 +26,11 @@ export const findPWTitle = styled.div`
     flex-direction: column;
     align-items: left;
     padding : 0px 0px 10px 0px;
-
-    font-family: 'AppleSDGothicNeoEB00';
     font-weight: 700;
     font-size: 31px;
     line-height: 31px;
 
     color: #000000;
-
-
 `
 
 export const SubTitle = styled.div`

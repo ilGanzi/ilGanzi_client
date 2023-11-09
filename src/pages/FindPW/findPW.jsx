@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { login } from "../../utils/store/reducer/user"; //변경하신다면 FindPW로 정정
 import { useNavigate } from "react-router-dom";
 import { useSetScreenSize } from "../../setScreenHeight";
+import PwSetting from "../../components/pwsetting/pwsetting"
 
 export default function Login(){
     const [email, setEmail] = useState("");
@@ -12,6 +13,7 @@ export default function Login(){
     useSetScreenSize();
     const [mailAuth, setMailAuth] = useState(false);
     const [authNum, setAuthNum] = useState("");
+    const [authCheckComponent, setAuthCheckComponent] = useState(false);
 
     const onClickFindPw = async (email) => { //이 부분 API 기능에 맞게 수정 부탁드리겠습니다.
        const loginEmail = `${email}@naver.com`
@@ -33,42 +35,47 @@ export default function Login(){
 
     const checkAuth = async(authNum) => {
         try{
-            navigate('/settings')
+            setAuthCheckComponent(true);
         }catch(error) {
             console.error(error);
         }
     }
-    return(
-        <styles.Container>
-            <styles.ServiceInfo>
+    return (
+        <>
+          {authCheckComponent ? (
+            <PwSetting/>
+          ) : (
+            <styles.Container>
+              <styles.ServiceInfo>
                 <styles.findPWTitle>비밀번호 찾기</styles.findPWTitle>
                 <styles.SubTitle>작성하신 이메일로 전송됩니다.</styles.SubTitle>
-            </styles.ServiceInfo>
-            <styles.LoginInfo>
+              </styles.ServiceInfo>
+              <styles.LoginInfo>
                 <styles.Classify>이메일</styles.Classify>
                 <styles.InputWrapper>
-                    <styles.EmailInput onChange={(e) => setEmail(e.target.value)}/>
-                    <styles.NaverMail>@naver.com</styles.NaverMail>
+                  <styles.EmailInput onChange={(e) => setEmail(e.target.value)} />
+                  <styles.NaverMail>@naver.com</styles.NaverMail>
                 </styles.InputWrapper>
                 <styles.AuthWrapper>
-                    {!mailAuth &&
-                    <styles.AuthButton onClick={sendAuth}>인증하기</styles.AuthButton>
-                    }
+                  {!mailAuth && (
+                    <styles.AuthButton onClick={() => sendAuth(email)}>인증하기</styles.AuthButton>
+                  )}
                 </styles.AuthWrapper>
                 <styles.FindIDNotice>메일이 오지 않을 경우, 스팸함을 확인해주세요.</styles.FindIDNotice>
-                {mailAuth && 
-                <>
+                {mailAuth && (
+                  <>
                     <styles.Classify>인증번호</styles.Classify>
                     <styles.InputWrapper>
-                        <styles.authNumInput onChange={(e) => setAuthNum(e.target.value)}/>
+                      <styles.authNumInput onChange={(e) => setAuthNum(e.target.value)} />
                     </styles.InputWrapper>
                     <styles.AuthWrapper>
-                        <styles.AuthCheckButton>인증번호 확인</styles.AuthCheckButton>
+                      <styles.AuthCheckButton onClick={() => checkAuth(authNum)}>인증번호 확인</styles.AuthCheckButton>
                     </styles.AuthWrapper>
-                </>
-                }
-            </styles.LoginInfo>
-
-        </styles.Container>
-    );
-};
+                  </>
+                )}
+              </styles.LoginInfo>
+            </styles.Container>
+          )}
+        </>
+      );
+}     
