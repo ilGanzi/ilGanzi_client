@@ -10,9 +10,11 @@ export default function Login(){
     useSetScreenSize();
     const [email, setEmail] = useState("");
     const dispatch = useDispatch();
-    const authtest = useSelector((state) => state.user)
+    const authtest = useSelector((state) => state.user);
     const navigate = useNavigate();
     const [phoneNum,setPhoneNum] = useState("");
+    const [mailAuth, setMailAuth] = useState(true);
+    const [authNum, setAuthNum] = useState("");
 
     const onClickFindID = async (phoneNum) => { //이 부분 API 기능에 맞게 수정 부탁드리겠습니다.
         try{

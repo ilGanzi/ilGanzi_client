@@ -72,8 +72,14 @@ export const InputWrapper = styled.div`
 `
 export const EmailInput = styled.input`
     font-size: 20px;
-    padding: 5px;
+    padding: 10px 5px 5px 5px;
     width: 60%;
+    border: none;
+`
+export const authNumInput = styled.input`
+    font-size: 20px;
+    padding: 10px;
+    width: 100%;
     border: none;
 `
 
@@ -87,7 +93,7 @@ export const FindIDNotice = styled.div`
     font-style: normal;
     font-weight: 400;
     font-size: 15px;
-
+    margin-bottom: 20px;
 `
 
 export const PassWordInput = styled.input`
@@ -138,4 +144,23 @@ export const Signup = styled(Link)`
     font-size: 13px;
     color: #808080;
     text-align: center;
+`
+
+export const AuthButton = styled.button`
+    width: 30%;
+    font-size: 15px;
+    margin-bottom: 10px;
+    color: #009456;
+`
+export const AuthCheckButton = styled.button`
+    width: 40%;
+    font-size: 15px;
+    margin-bottom: 10px;
+    color: #009456;
+`
+
+export const AuthWrapper = styled.div`
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
 `

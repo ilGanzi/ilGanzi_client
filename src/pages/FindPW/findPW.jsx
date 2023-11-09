@@ -10,6 +10,8 @@ export default function Login(){
     const [email, setEmail] = useState("");
     const navigate = useNavigate();
     useSetScreenSize();
+    const [mailAuth, setMailAuth] = useState(false);
+    const [authNum, setAuthNum] = useState("");
 
     const onClickFindPw = async (email) => { //이 부분 API 기능에 맞게 수정 부탁드리겠습니다.
        const loginEmail = `${email}@naver.com`
@@ -18,9 +20,24 @@ export default function Login(){
     } catch(error){
         console.error(error)
     }}
-    
 
+    const sendAuth = async(email) => {
+        const loginEmail = `${email}@naver.com`
+        setMailAuth(true);
+        try{
+            
+        }catch(error){
+            console.error(error);
+        }
+    }
 
+    const checkAuth = async(authNum) => {
+        try{
+            navigate('/settings')
+        }catch(error) {
+            console.error(error);
+        }
+    }
     return(
         <styles.Container>
             <styles.ServiceInfo>
@@ -33,8 +50,23 @@ export default function Login(){
                     <styles.EmailInput onChange={(e) => setEmail(e.target.value)}/>
                     <styles.NaverMail>@naver.com</styles.NaverMail>
                 </styles.InputWrapper>
+                <styles.AuthWrapper>
+                    {!mailAuth &&
+                    <styles.AuthButton onClick={sendAuth}>인증하기</styles.AuthButton>
+                    }
+                </styles.AuthWrapper>
                 <styles.FindIDNotice>메일이 오지 않을 경우, 스팸함을 확인해주세요.</styles.FindIDNotice>
-                <styles.FindIDButton onClick={() => onClickFindPw(email)}>비밀번호 찾기</styles.FindIDButton>
+                {mailAuth && 
+                <>
+                    <styles.Classify>인증번호</styles.Classify>
+                    <styles.InputWrapper>
+                        <styles.authNumInput onChange={(e) => setAuthNum(e.target.value)}/>
+                    </styles.InputWrapper>
+                    <styles.AuthWrapper>
+                        <styles.AuthCheckButton>인증번호 확인</styles.AuthCheckButton>
+                    </styles.AuthWrapper>
+                </>
+                }
             </styles.LoginInfo>
 
         </styles.Container>
