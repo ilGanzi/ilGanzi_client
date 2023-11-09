@@ -4,10 +4,12 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { login } from "../../utils/store/reducer/user"; //변경하신다면 FindPW로 정정
 import { useNavigate } from "react-router-dom";
+import { useSetScreenSize } from "../../setScreenHeight";
 
 export default function Login(){
     const [email, setEmail] = useState("");
     const navigate = useNavigate();
+    useSetScreenSize();
 
     const onClickFindPw = async (email) => { //이 부분 API 기능에 맞게 수정 부탁드리겠습니다.
        const loginEmail = `${email}@naver.com`

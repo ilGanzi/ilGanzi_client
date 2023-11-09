@@ -4,8 +4,10 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { login } from "../../utils/store/reducer/user"; //변경하신다면 FindID로 정정
 import { useNavigate } from "react-router-dom";
+import { useSetScreenSize } from "../../setScreenHeight";
 
 export default function Login(){
+    useSetScreenSize();
     const [email, setEmail] = useState("");
     const dispatch = useDispatch();
     const authtest = useSelector((state) => state.user)
