@@ -12,21 +12,12 @@ export default function Login(){
     const navigate = useNavigate();
 
     const onClickFindID = async (email) => { //이 부분 API 기능에 맞게 수정 부탁드리겠습니다.
-       /*const FindID= `${email}@naver.com`
+       const loginEmail = `${email}@naver.com`
         try{
-        const loginData = await UserApi.postLogin(loginEmail,pw);
-        dispatch(login({
-            isAuthorized: true,
-            email: loginData.user.email,
-            password: loginData.user.password,
-            accessToken: loginData.token.access,
-        }));
-        console.log('damn')
-        console.log(authtest);
-        navigate('/')
+        const loginData = await UserApi.postFindPw(loginEmail);
     } catch(error){
         console.error(error)
-    }*/}
+    }}
     
 
 

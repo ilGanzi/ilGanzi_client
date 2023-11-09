@@ -73,17 +73,13 @@ export const InputWrapper = styled.div`
 export const EmailInput = styled.input`
     font-size: 20px;
     padding: 5px;
-    width: 60%;
+    width: 100%;
     border: none;
-`
-
-export const NaverMail = styled.div`
-    display: flex;
+    margin-top: 20px;
 `
 
 export const FindIDNotice = styled.div`
     width: 100%;
-    font-family: 'AppleSDGothicNeoM00';
     font-style: normal;
     font-weight: 400;
     font-size: 15px;

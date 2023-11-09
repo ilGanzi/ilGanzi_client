@@ -60,8 +60,8 @@ export default function Login(){
                 <styles.LoginButton onClick={() => onClickLogin(email,pw)}>LOGIN</styles.LoginButton>
             </styles.LoginInfo>
             <styles.LoginOption>
-                <styles.ForgotId>아이디 찾기</styles.ForgotId>
-                <styles.ForgotPw>비밀번호 찾기</styles.ForgotPw>
+                <styles.ForgotId to={`/findID`}>아이디 찾기</styles.ForgotId>
+                <styles.ForgotPw to={`/findPW`}>비밀번호 찾기</styles.ForgotPw>
                 <styles.Signup to={`/signup`}>회원가입</styles.Signup>
             </styles.LoginOption>
             {isLoading && <LoadingScreen/>}

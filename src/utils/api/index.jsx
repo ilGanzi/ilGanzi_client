@@ -64,6 +64,23 @@ class UserApi {
         }
     };
 
+    static async postFindId() {
+        try{
+            const response = await apicall.post(`/api/accounts/update/findid/`);
+            return
+        } catch(error){
+            console.error(error);
+        }
+    };
+
+    static async postFindPw(){
+        try{
+            const response = await apicall.post(`/accounts/findpw`);
+        } catch(error){
+            console.error(error);
+        }
+    }
+
     
 }
 
