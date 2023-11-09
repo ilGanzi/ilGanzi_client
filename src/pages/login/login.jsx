@@ -1,6 +1,6 @@
 import * as styles from "./loginStyle";
 import UserApi from "../../utils/api";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye } from "@fortawesome/free-regular-svg-icons";
 import { useDispatch, useSelector } from "react-redux";
@@ -17,6 +17,7 @@ export default function Login(){
     const authtest = useSelector((state) => state.user)
     const navigate = useNavigate();
     const [isLoading,setIsLoading] = useState(false);
+    const viewIntro = localStorage.getItem("visited")
 
     const onClickLogin = async (email,pw) => {
         setIsLoading(true)
@@ -39,6 +40,13 @@ export default function Login(){
     const onClickEye = () => {
         setShowPw(!showPw);
     };
+
+    useEffect(() => {
+        if(!viewIntro){
+            navigate('/intro')
+        }else{
+        }
+    })
 
     return(
         <styles.Container>
