@@ -17,14 +17,18 @@ export const ServiceInfo = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 30% 20px 30% 20px;
+    padding: 30% 20px 20% 20px;
 `
+export const LogoImage = styled.img`
+    width: 100%;
+    `
 
 export const SubTitle = styled.div`
     width: 100%;
     font-size: 16px;
     text-align: center;
     display: flex;
+    font-weight: 700;
     justify-content: center;
     `
 

@@ -58,7 +58,7 @@ export const Signup_mention = styled.div`
 
 export const NameInputSection = styled.div`
     width: 100%;
-    padding: 32px 20px 16px 20px;
+    padding: 16px 20px 16px 20px;
     flex-direction: column;
     display: flex
     justify-content: space-between;
@@ -88,7 +88,6 @@ export const PasswordInputWrapper = styled.div`
     border-radius: 16px;
     padding: 5px 20px 5px 20px;
     align-items: center;
-    margin-bottom: 10px;
 `
 export const EmailInputWrapper = styled.div`
     width: 80%;
@@ -98,12 +97,11 @@ export const EmailInputWrapper = styled.div`
     border-radius: 16px;
     padding: 5px 20px 5px 20px;
     align-items: center;
-    margin-bottom: 10px;
 `
 
 export const PassWord_CheckSection = styled.div`
     width: 100%;
-    padding: 0px 20px 16px 20px;
+    padding: 0px 20px 10px 20px;
     flex-direction: column;
     box-sizing: boredr-box;
     display: flex
@@ -119,7 +117,6 @@ export const NameInput = styled.input`
         color: #cccccc;
     }
     border: none;
-    margin-bottom: 10px;
     border-radius: 16px;
     border: 1px solid grey;
 `
@@ -177,7 +174,6 @@ export const NameInputInform = styled.div`
 
 export const ButtonWrapper = styled.div`
     width: 100%;
-    padding-top: 20px;
     display: flex;
     flex-direction: column;
     `
@@ -191,4 +187,23 @@ export const FinishButton = styled.button`
     padding: 16px 20px 16px 20px;
     border-radius: 16px;
     font-size: 16px;
+    `
+
+export const TermsOpen = styled.div`
+    width: 100%;
+    padding: 5px 20px 5px 20px;
+    color: blue;
+    `
+
+export const TermsWrapper = styled.div`
+    width: 100%;
+    display: flex;
+    align-items: center;
+    padding: 0px 20px 10px 20px;
+    `
+
+export const TermsText = styled.div`
+    font-size: 15px;
+    font-weight: 700;
+    padding-left: 10px;
     `

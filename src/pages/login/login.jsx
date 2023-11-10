@@ -8,6 +8,7 @@ import { login } from "../../utils/store/reducer/user";
 import { useNavigate } from "react-router-dom";
 import { noAuthApi } from "../../utils/interceptor/axiosInterceptor";
 import LoadingScreen from "../../components/loading/loading";
+import logo from "../../assets/logo.png"
 
 export default function Login(){
     const [email, setEmail] = useState("");
@@ -34,6 +35,7 @@ export default function Login(){
         navigate('/')
     } catch(error){
         console.error(error)
+        setIsLoading(false);
     }}
     
 
@@ -51,8 +53,8 @@ export default function Login(){
     return(
         <styles.Container>
             <styles.ServiceInfo>
-                <div>로고</div>
-                <styles.SubTitle>서비스 한 줄 설명</styles.SubTitle>
+                <styles.LogoImage src={logo}/>
+                <styles.SubTitle>하루 30초, 손 안의 나무를 현실로</styles.SubTitle>
             </styles.ServiceInfo>
             <styles.LoginInfo>
                 <styles.Classify>이메일 주소</styles.Classify>

@@ -24,17 +24,18 @@ export default function Login(){
     }}
 
     const sendAuth = async(email) => {
-        const loginEmail = `${email}@naver.com`
+      try{
+        const postAuth = await UserApi.postFindPw(email);
         setMailAuth(true);
-        try{
-            
-        }catch(error){
+        } catch(error){
             console.error(error);
+            alert("인터넷 환경을 확인 후 다시 시도해 주세요.")
         }
     }
 
-    const checkAuth = async(authNum) => {
+    const checkAuth = async(email,authNum) => {
         try{
+            const data = await UserApi.postCheckAuth(email,authNum);
             setAuthCheckComponent(true);
         }catch(error) {
             console.error(error);
@@ -48,7 +49,7 @@ export default function Login(){
             <styles.Container>
               <styles.ServiceInfo>
                 <styles.findPWTitle>비밀번호 찾기</styles.findPWTitle>
-                <styles.SubTitle>작성하신 이메일로 전송됩니다.</styles.SubTitle>
+                <styles.SubTitle>작성하신 이메일로 인증번호가 전송됩니다.</styles.SubTitle>
               </styles.ServiceInfo>
               <styles.LoginInfo>
                 <styles.Classify>이메일</styles.Classify>
@@ -69,7 +70,7 @@ export default function Login(){
                       <styles.authNumInput onChange={(e) => setAuthNum(e.target.value)} />
                     </styles.InputWrapper>
                     <styles.AuthWrapper>
-                      <styles.AuthCheckButton onClick={() => checkAuth(authNum)}>인증번호 확인</styles.AuthCheckButton>
+                      <styles.AuthCheckButton onClick={() => checkAuth(email,authNum)}>인증번호 확인</styles.AuthCheckButton>
                     </styles.AuthWrapper>
                   </>
                 )}

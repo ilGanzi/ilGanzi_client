@@ -85,7 +85,6 @@ export const NaverMail = styled.div`
 
 export const FindIDNotice = styled.div`
     width: 100%;
-    font-family: 'AppleSDGothicNeoM00';
     font-style: normal;
     font-weight: 400;
     font-size: 15px;

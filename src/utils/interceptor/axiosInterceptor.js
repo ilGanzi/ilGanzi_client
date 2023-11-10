@@ -65,19 +65,6 @@ apicall.interceptors.response.use(
       return Promise.reject(error);
     }
   );
-
-const noAuthApi = axios.create({
-    baseURL: 'https://ilganziback-lvwun.run.goorm.site', // API 기본 URL 설정
-    timeout: 5000,
-  });
-
-noAuthApi.interceptors.response.use(
-    response => response,
-    async error => {
-      // 에러 처리 로직
-      return Promise.reject(error);
-    }
-  );
   
   
 export { apicall };

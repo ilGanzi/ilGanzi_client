@@ -2,11 +2,13 @@ import { useState } from 'react';
 import { useSetScreenSize } from '../../setScreenHeight';
 import * as styles from './settingstyle'
 import UserApi from '../../utils/api';
+import { useNavigate } from 'react-router-dom';
 
 export default function SettingPage(){
     useSetScreenSize();
     const [treeName, setTreeName] = useState("");
     const [regexError,setRegexError] = useState(false);
+    const navigate = useNavigate();
 
     const onChangeTreeName = (e) => {
         //값이 숫자인지 검사하는 정규식
@@ -22,10 +24,11 @@ export default function SettingPage(){
 
     const onClickFinish = async(treeName) =>{
         try{
-            const data = await UserApi.postTreename(treeName)
+            const data = await UserApi.postTreename(treeName);
+            alert('나무 이름이 설정되었습니다.');
+            navigate('/onborn');
         } catch(error){
             console.error(error);
-            console.log('qwrqwrqwr')
         }
     }
     
