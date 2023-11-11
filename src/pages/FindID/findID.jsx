@@ -4,29 +4,29 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { login } from "../../utils/store/reducer/user"; //변경하신다면 FindID로 정정
 import { useNavigate } from "react-router-dom";
+import { useSetScreenSize } from "../../setScreenHeight";
+import IdResult from "../../components/idresult/idresult";
 
 export default function Login(){
+    useSetScreenSize();
     const [email, setEmail] = useState("");
     const dispatch = useDispatch();
-    const authtest = useSelector((state) => state.user)
+    const authtest = useSelector((state) => state.user);
     const navigate = useNavigate();
+    const [phoneNum,setPhoneNum] = useState("");
+    const [mailAuth, setMailAuth] = useState(true);
+    const [authNum, setAuthNum] = useState("");
+    const [isResultOpen,setIsResultOpen] = useState(false);
 
-    const onClickFindID = async (email) => { //이 부분 API 기능에 맞게 수정 부탁드리겠습니다.
-       /*const FindID= `${email}@naver.com`
+    const onClickFindID = async (phoneNum) => { //이 부분 API 기능에 맞게 수정 부탁드리겠습니다.
         try{
-        const loginData = await UserApi.postLogin(loginEmail,pw);
-        dispatch(login({
-            isAuthorized: true,
-            email: loginData.user.email,
-            password: loginData.user.password,
-            accessToken: loginData.token.access,
-        }));
-        console.log('damn')
-        console.log(authtest);
-        navigate('/')
+        const findIdData = await UserApi.postFindId(phoneNum);
+        setEmail(findIdData.email);
+        setIsResultOpen(true);
     } catch(error){
         console.error(error)
-    }*/}
+        alert('인터넷 연결을 확인 후 다시 시도해 주세요.')
+    }}
     
 
 
@@ -34,18 +34,16 @@ export default function Login(){
         <styles.Container>
             <styles.ServiceInfo>
                 <styles.findIDTitle>아이디 찾기</styles.findIDTitle>
-                <styles.SubTitle>작성하신 이메일로 전송됩니다.</styles.SubTitle>
+                <styles.SubTitle>가입했던 계정의 전화번호를 입력해주세요.</styles.SubTitle>
             </styles.ServiceInfo>
             <styles.LoginInfo>
-                <styles.Classify>이메일</styles.Classify>
+                <styles.Classify>전화번호 ( - 를 제외하고 입력해주세요. )</styles.Classify>
                 <styles.InputWrapper>
-                    <styles.EmailInput onChange={(e) => setEmail(e.target.value)}/>
-                    <styles.NaverMail>@naver.com</styles.NaverMail>
+                    <styles.EmailInput onChange={(e) => setPhoneNum(e.target.value)}/>
                 </styles.InputWrapper>
-                <styles.FindIDNotice>메일이 오지 않을 경우, 스팸함을 확인해주세요.</styles.FindIDNotice>
-                <styles.FindIDButton onClick={() => onClickFindID(email)}>아이디찾기</styles.FindIDButton>
+                <styles.FindIDButton onClick={() => onClickFindID(phoneNum)}>아이디 찾기</styles.FindIDButton>
             </styles.LoginInfo>
-
+            {isResultOpen && <IdResult isResultOpen={isResultOpen} setIsResultOpen={setIsResultOpen} id={email}/>}
         </styles.Container>
     );
 };

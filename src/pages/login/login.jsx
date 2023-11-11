@@ -1,6 +1,6 @@
 import * as styles from "./loginStyle";
 import UserApi from "../../utils/api";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye } from "@fortawesome/free-regular-svg-icons";
 import { useDispatch, useSelector } from "react-redux";
@@ -8,6 +8,7 @@ import { login } from "../../utils/store/reducer/user";
 import { useNavigate } from "react-router-dom";
 import { noAuthApi } from "../../utils/interceptor/axiosInterceptor";
 import LoadingScreen from "../../components/loading/loading";
+import logo from "../../assets/logo.png"
 
 export default function Login(){
     const [email, setEmail] = useState("");
@@ -17,6 +18,7 @@ export default function Login(){
     const authtest = useSelector((state) => state.user)
     const navigate = useNavigate();
     const [isLoading,setIsLoading] = useState(false);
+    const viewIntro = localStorage.getItem("visited")
 
     const onClickLogin = async (email,pw) => {
         setIsLoading(true)
@@ -28,11 +30,11 @@ export default function Login(){
         }));
         localStorage.setItem("refToken",loginData.token.refresh)
         console.log('damn')
-        console.log(authtest);
         setIsLoading(false)
         navigate('/')
     } catch(error){
         console.error(error)
+        setIsLoading(false);
     }}
     
 
@@ -40,11 +42,18 @@ export default function Login(){
         setShowPw(!showPw);
     };
 
+    useEffect(() => {
+        if(!viewIntro){
+            navigate('/intro')
+        }else{
+        }
+    })
+
     return(
         <styles.Container>
             <styles.ServiceInfo>
-                <div>로고</div>
-                <styles.SubTitle>서비스 한 줄 설명</styles.SubTitle>
+                <styles.LogoImage src={logo}/>
+                <styles.SubTitle>하루 30초, 손 안의 나무를 현실로</styles.SubTitle>
             </styles.ServiceInfo>
             <styles.LoginInfo>
                 <styles.Classify>이메일 주소</styles.Classify>
@@ -60,8 +69,8 @@ export default function Login(){
                 <styles.LoginButton onClick={() => onClickLogin(email,pw)}>LOGIN</styles.LoginButton>
             </styles.LoginInfo>
             <styles.LoginOption>
-                <styles.ForgotId>아이디 찾기</styles.ForgotId>
-                <styles.ForgotPw>비밀번호 찾기</styles.ForgotPw>
+                <styles.ForgotId to={`/findID`}>아이디 찾기</styles.ForgotId>
+                <styles.ForgotPw to={`/findPW`}>비밀번호 찾기</styles.ForgotPw>
                 <styles.Signup to={`/signup`}>회원가입</styles.Signup>
             </styles.LoginOption>
             {isLoading && <LoadingScreen/>}

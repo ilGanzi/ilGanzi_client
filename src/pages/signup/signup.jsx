@@ -6,6 +6,7 @@ import UserApi from '../../utils/api';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { login } from '../../utils/store/reducer/user';
+import Terms from '../../components/terms/terms';
 
 
 export default function SettingPage() {
@@ -17,6 +18,7 @@ export default function SettingPage() {
   const [IPWError, setIPWError] = useState(false);
   const [CPWError, setCPWError] = useState(false);
   const [passwordError, setPasswordError] = useState(false);
+  const [isTermsOpen, setIsTermsOpen] = useState(false);
 
   const [nameTouched, setNameTouched] = useState(false);
   const [idTouched, setIdTouched] = useState(false);
@@ -96,12 +98,16 @@ export default function SettingPage() {
     dispatch(login({
         isAuthorized: true,
     }));
-    alert("회원가입이 완료되었습니다.")
-    console.log(register.data);
-    navigate('/settings')
+    console.log(register);
+    alert("회원가입이 완료되었습니다.");
+    navigate('/settings');
 } catch(error){
     console.error(error)
 }}
+
+  const onClickTerms = () => {
+    setIsTermsOpen(true);
+  }
 
   return (
     <styles.SettingContainer>
@@ -176,6 +182,11 @@ export default function SettingPage() {
             </div>
           )}
         </styles.PassWord_CheckSection>
+        <styles.TermsOpen onClick={onClickTerms}>이용 약관</styles.TermsOpen>
+        <styles.TermsWrapper>
+          <input type='checkbox'/>
+          <styles.TermsText>asfasf</styles.TermsText>
+        </styles.TermsWrapper>
         <styles.ButtonWrapper>
         <styles.FinishButton
           onClick={() => onSubmitSignup(ID,IPW,Name)}
@@ -190,6 +201,7 @@ export default function SettingPage() {
         </styles.FinishButton>
         </styles.ButtonWrapper>
       </styles.SettingWrapper>
+      {isTermsOpen && <Terms isTermsOpen={isTermsOpen} setIsTermsOpen={setIsTermsOpen}/>}
     </styles.SettingContainer>
   );
 }

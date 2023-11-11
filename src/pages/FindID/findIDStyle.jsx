@@ -27,7 +27,6 @@ export const findIDTitle = styled.div`
     align-items: left;
     padding : 0px 0px 10px 0px;
 
-    font-family: 'AppleSDGothicNeoEB00';
     font-weight: 700;
     font-size: 31px;
     line-height: 31px;
@@ -73,19 +72,15 @@ export const InputWrapper = styled.div`
 export const EmailInput = styled.input`
     font-size: 20px;
     padding: 5px;
-    width: 60%;
+    width: 100%;
     border: none;
-`
-
-export const NaverMail = styled.div`
-    display: flex;
+    margin-top: 20px;
 `
 
 export const FindIDNotice = styled.div`
     width: 100%;
-    font-family: 'AppleSDGothicNeoM00';
     font-style: normal;
-    font-weight: 400;
+    font-weight: 700;
     font-size: 15px;
 
 `

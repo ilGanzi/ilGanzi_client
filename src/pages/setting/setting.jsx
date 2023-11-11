@@ -1,11 +1,14 @@
 import { useState } from 'react';
 import { useSetScreenSize } from '../../setScreenHeight';
 import * as styles from './settingstyle'
+import UserApi from '../../utils/api';
+import { useNavigate } from 'react-router-dom';
 
 export default function SettingPage(){
     useSetScreenSize();
     const [treeName, setTreeName] = useState("");
     const [regexError,setRegexError] = useState(false);
+    const navigate = useNavigate();
 
     const onChangeTreeName = (e) => {
         //값이 숫자인지 검사하는 정규식
@@ -18,6 +21,16 @@ export default function SettingPage(){
         setRegexError(true);
       }
     };
+
+    const onClickFinish = async(treeName) =>{
+        try{
+            const data = await UserApi.postTreename(treeName);
+            alert('나무 이름이 설정되었습니다.');
+            navigate('/onborn');
+        } catch(error){
+            console.error(error);
+        }
+    }
     
 
     return(
@@ -43,7 +56,9 @@ export default function SettingPage(){
                         style={{
                             backgroundColor: regexError ? '#e9e9e9' : '#009456',
                             color: regexError ? '#777777' : 'white'
-                    }}>완료</styles.FinishButton>
+                         }}
+                        onClick={() => onClickFinish(treeName)}
+                    >완료</styles.FinishButton>
         </styles.SettingContainer>
     );
 }

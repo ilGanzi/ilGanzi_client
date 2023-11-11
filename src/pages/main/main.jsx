@@ -17,41 +17,53 @@ import UserApi from '../../utils/api';
 export default function MainPage(){
     useSetScreenSize();
     const [isOpen,setIsOpen] = useState(false);
-    const [isWatered, setIsWatered] = useState(false);
+    const [watered, setWatered] = useState(0);
     const [isAdOpen,setIsAdOpen] = useState(false);
     const [isLoading, setIsLoading] = useState(true);
     const userData = useSelector((state) => state.user)
     const navigate = useNavigate();
+    const serverUrl = 'https://ilganziback-lvwun.run.goorm.site/';
+    const[info,setInfo] = useState({});
+
+    const [treename, setTreename] = useState("");
+    const [treephase,setTreePhase] = useState(0);
+    const [treeimage, setTreeImage] = useState("");
+    const [totalUser, setTotalUser] = useState("0")
+
 
     const toggleSlide = () => {
         setIsOpen(true);
     };
 
-    const onClickWatering = () => {
-        setIsWatered(true);
-    };
-
-    const againWatering = () => {
-        setIsAdOpen(true);
+    const onClickWatering = async () => {
+        try{
+            const water = await UserApi.postWatering();
+        } catch(error){
+            alert('인터넷 연결을 확인하고 다시 시도해 주세요.')
+        }
     };
     
-    const[info,setInfo] = useState({});
     const userInfo = async () => {
         try{
-            const info = await UserApi.getUser();
-            setInfo(info);
-            console.log(info);
+            const infoData = await UserApi.getUser();
+            setInfo(infoData);
+
+            setWatered(infoData.user.watered);
+            setTreename(infoData.user.treename);
+            setTreePhase(infoData.user.treephase);
+            setTreeImage(infoData.treeimage);
+            setTotalUser(infoData.totalUser);
+            console.log(infoData);
             setIsLoading(false);
         } catch(error){
             console.error(error);
         }
     };
-
-
-
+    
+    
+    
     useEffect(() => {
         if (!userData.value.isAuthorized) {
-            console.log(userData.value.isAuthorized);
             navigate('/login');
             console.log("err");
         }else{
@@ -59,32 +71,41 @@ export default function MainPage(){
         }
     }, []);
 
+    useEffect(() => {
+
+    })
+
+
         return(
         <styles.MainContainer style={{
             backgroundImage: `url(${backgroundImage})`,
             backgroundSize: 'cover',
         }}>
             <styles.HeaderContainer>
-                <styles.TreeInf>금쪽이의 지구 LV.1</styles.TreeInf>
+                <styles.TreeInf>{treename}의 지구 LV.{treephase}</styles.TreeInf>
                 <FontAwesomeIcon icon={faBars} onClick={toggleSlide}/>
                 <Sidebar isOpen={isOpen} setIsOpen={setIsOpen}/>
             </styles.HeaderContainer>
             <styles.WateringInf>
-                 💧물 주기 {info.watered}
+                 💧물 주기 {watered}
             </styles.WateringInf>
-            { isWatered ?
+            { watered === 0 ? (
+                <styles.Watering onClick={onClickWatering}>오늘의 물주기</styles.Watering>
+            ): watered === 1 ? (
             <styles.OneMoreWateringSection>
             <styles.OneMoreWatering src={oneMoreWatering}/>
             <styles.Watering
             onClick={setIsAdOpen}
             style={{paddingTop: '0px'}}
             >한번 더 물주기</styles.Watering>
-            </styles.OneMoreWateringSection> : 
-            <styles.Watering onClick={onClickWatering}>오늘의 물주기</styles.Watering>
+            </styles.OneMoreWateringSection> ) :
+            (
+                <styles.Watering>오늘 줄 수 있는 물을 모두 주었어요.</styles.Watering>
+            )
              }
-            <styles.Plant src={plant}/>
+            <styles.Plant style={{backgroundColor: 'transparent'}} src={`${serverUrl}${info.treeimage}`}/>
             <styles.Quotes>내일 지구가 멸망하더라도<br/>나는 오늘 한 그루의 사과나무를 심겠다.</styles.Quotes>
-            <styles.Quotes>109,282명이 함께 하고 있어요.</styles.Quotes>
+            <styles.Quotes>{totalUser}명이 함께 하고 있어요.</styles.Quotes>
             {isAdOpen && 
             <Advertise isAdOpen={isAdOpen} setIsAdOpen={setIsAdOpen} />
             } 
