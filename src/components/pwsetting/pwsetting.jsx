@@ -5,6 +5,7 @@ import { faEye } from "@fortawesome/free-regular-svg-icons";
 import { useState } from "react";
 import UserApi from "../../utils/api";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 
 const PwSetting = () => {
@@ -28,13 +29,15 @@ const PwSetting = () => {
         setPwTouched(true);
     };
 
-    const pwresetting = async (pw) => {
+    const pwresetting = async(pw) => {
       try{
-          const pwreset = await UserApi.postPwResetting(pw)
-          alert('비밀번호 재설정이 완료되었습니다. 다시 로그인 해주세요.')
-          navigate('/login')
+          const pwreset = await UserApi.postPwResetting(pw);
+          alert('비밀번호 재설정이 완료되었습니다. 다시 로그인 해주세요.');
+          navigate('/login');
       } catch(error){
-          alert('인터넷 연결을 확인하고 다시 시도해 주세요.')
+          alert(axios.defaults.headers.common.Authorization);
+          console.error(error);
+          alert('인터넷 연결을 확인하고 다시 시도해 주세요.');
       }
     }
 
@@ -55,7 +58,7 @@ const PwSetting = () => {
               {newPw.length < 8 ? '비밀번호는 8자 이상이어야 합니다.' : '비밀번호에 문자, 숫자, 기호를 조합해야 합니다.'}
             </div>
               )}
-            <styles.PwSettingButton >재설정</styles.PwSettingButton>
+            <styles.PwSettingButton onClick={() => pwresetting(newPw)}>재설정</styles.PwSettingButton>
         </styles.ServiceInfo>
     </styles.Container>
   );

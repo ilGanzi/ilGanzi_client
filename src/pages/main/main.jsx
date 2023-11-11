@@ -47,7 +47,13 @@ export default function MainPage(){
         try{
             const infoData = await UserApi.getUser();
             setInfo(infoData);
-            console.log(info);
+
+            setWatered(infoData.user.watered);
+            setTreename(infoData.user.treename);
+            setTreePhase(infoData.user.treephase);
+            setTreeImage(infoData.treeimage);
+            setTotalUser(infoData.totalUser);
+            console.log(infoData);
             setIsLoading(false);
         } catch(error){
             console.error(error);
@@ -65,6 +71,10 @@ export default function MainPage(){
         }
     }, []);
 
+    useEffect(() => {
+
+    })
+
 
         return(
         <styles.MainContainer style={{
@@ -72,7 +82,7 @@ export default function MainPage(){
             backgroundSize: 'cover',
         }}>
             <styles.HeaderContainer>
-                <styles.TreeInf>{info.user.treename}의 지구 LV.{info.user.treephase}</styles.TreeInf>
+                <styles.TreeInf>{treename}의 지구 LV.{treephase}</styles.TreeInf>
                 <FontAwesomeIcon icon={faBars} onClick={toggleSlide}/>
                 <Sidebar isOpen={isOpen} setIsOpen={setIsOpen}/>
             </styles.HeaderContainer>
@@ -93,9 +103,9 @@ export default function MainPage(){
                 <styles.Watering>오늘 줄 수 있는 물을 모두 주었어요.</styles.Watering>
             )
              }
-            <styles.Plant src={`${serverUrl}${info.treeimage}`}/>
+            <styles.Plant style={{backgroundColor: 'transparent'}} src={`${serverUrl}${info.treeimage}`}/>
             <styles.Quotes>내일 지구가 멸망하더라도<br/>나는 오늘 한 그루의 사과나무를 심겠다.</styles.Quotes>
-            <styles.Quotes>{info.totalUser}명이 함께 하고 있어요.</styles.Quotes>
+            <styles.Quotes>{totalUser}명이 함께 하고 있어요.</styles.Quotes>
             {isAdOpen && 
             <Advertise isAdOpen={isAdOpen} setIsAdOpen={setIsAdOpen} />
             } 

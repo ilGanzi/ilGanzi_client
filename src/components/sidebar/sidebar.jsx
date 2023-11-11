@@ -6,6 +6,7 @@ import UserApi from "../../utils/api";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { logout } from "../../utils/store/reducer/user";
+import axios from "axios";
 
 const Sidebar = ({isOpen,setIsOpen}) => {
   const outside = useRef();
@@ -28,19 +29,15 @@ const Sidebar = ({isOpen,setIsOpen}) => {
     }
   }
 
-  const onClickLogout = async () => {
-      try{
-        UserApi.deleteLogout();
+  const onClickLogout = () => {
         dispatch(logout({
           isAuthorized: false
         }));
-        alert('로그아웃되었습니다.')
-        navigate('/login')
-      } catch(error){
-        alert('로그아웃 실패')
-        console.error(error)
+        delete axios.defaults.headers.common['Authorization'];
+        localStorage.setItem("refToken","");
+        alert('로그아웃되었습니다.');
+        navigate('/login');
       }
-  }
 
   return (
       <styles.Sidebar id="sidebar" ref={outside} className={isOpen ? 'open': ''}>

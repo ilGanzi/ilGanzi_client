@@ -30,7 +30,6 @@ export default function Login(){
         }));
         localStorage.setItem("refToken",loginData.token.refresh)
         console.log('damn')
-        console.log(authtest);
         setIsLoading(false)
         navigate('/')
     } catch(error){

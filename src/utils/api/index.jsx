@@ -13,7 +13,7 @@ class UserApi {
             const response = await apicall.post(`/api/accounts/auth/`,loginData);
             const accessToken = response.data.token.access;
             axios.defaults.headers.common['Authorization'] = `Bearer ${accessToken}`;
-            console.log("login success");
+            alert(axios.defaults.headers.common.Authorization);
             return response.data
         } catch(error){
             console.error(error)
@@ -59,7 +59,7 @@ static async postRegister(email,pw,phonenum) {
         try{
             const response = await apicall.delete(`/api/accounts/auth/`);
             delete axios.defaults.headers.common['Authorization'];
-
+            localStorage.setItem("refToken","");
         } catch(error){
             console.error(error);
             throw error;
@@ -86,10 +86,13 @@ static async postRegister(email,pw,phonenum) {
         }
     };
 
-    static async postFindId() {
+    static async postFindId(phoneNum) {
         try{
-            const response = await apicall.post(`/api/accounts/update/findid/`);
-            return
+            const numData = {
+                phoneNumber: phoneNum
+            };
+            const response = await apicall.post(`/api/accounts/findid/`,numData);
+            return response.data
         } catch(error){
             console.error(error);
             throw error;
@@ -102,7 +105,7 @@ static async postRegister(email,pw,phonenum) {
             const emailData = {
                 email: loginEmail
             };
-            const response = await apicall.post(`/accounts/findpw/`,emailData);
+            const response = await apicall.post(`/api/accounts/findpw/`,emailData);
         } catch(error){
             console.error(error);
             throw error;
@@ -115,9 +118,9 @@ static async postRegister(email,pw,phonenum) {
             const authData = {
                 email: loginEmail,
                 code: code,
-            }
-            const response = await apicall.patch(`/accounts/user/`,authData);
-            const tempaccessToken = response.data.access
+            };
+            const response = await apicall.patch(`/api/accounts/findpw/`,authData);
+            const tempaccessToken = response.data.access;
             axios.defaults.headers.common['Authorization'] = `Bearer ${tempaccessToken}`
         } catch(error){
             console.error(error);
@@ -129,8 +132,8 @@ static async postRegister(email,pw,phonenum) {
         try{
             const pwData = {
                 password: pw
-            }
-            const response = await apicall.post(`/accounts/user/resetPw/`,pwData);
+            };
+            const response = await apicall.post(`/api/accounts/user/resetPw/`,pwData);
             delete axios.defaults.headers.common['Authorization'];
         } catch(error){
             console.error(error);

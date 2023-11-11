@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { login } from "../../utils/store/reducer/user"; //변경하신다면 FindID로 정정
 import { useNavigate } from "react-router-dom";
 import { useSetScreenSize } from "../../setScreenHeight";
+import IdResult from "../../components/idresult/idresult";
 
 export default function Login(){
     useSetScreenSize();
@@ -15,14 +16,16 @@ export default function Login(){
     const [phoneNum,setPhoneNum] = useState("");
     const [mailAuth, setMailAuth] = useState(true);
     const [authNum, setAuthNum] = useState("");
+    const [isResultOpen,setIsResultOpen] = useState(false);
 
     const onClickFindID = async (phoneNum) => { //이 부분 API 기능에 맞게 수정 부탁드리겠습니다.
         try{
         const findIdData = await UserApi.postFindId(phoneNum);
-        navigate('/')
-        setEmail(findIdData.data.email);
+        setEmail(findIdData.email);
+        setIsResultOpen(true);
     } catch(error){
         console.error(error)
+        alert('인터넷 연결을 확인 후 다시 시도해 주세요.')
     }}
     
 
@@ -40,7 +43,7 @@ export default function Login(){
                 </styles.InputWrapper>
                 <styles.FindIDButton onClick={() => onClickFindID(phoneNum)}>아이디 찾기</styles.FindIDButton>
             </styles.LoginInfo>
-
+            {isResultOpen && <IdResult isResultOpen={isResultOpen} setIsResultOpen={setIsResultOpen} id={email}/>}
         </styles.Container>
     );
 };

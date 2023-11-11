@@ -38,6 +38,7 @@ export default function Login(){
             const data = await UserApi.postCheckAuth(email,authNum);
             setAuthCheckComponent(true);
         }catch(error) {
+            alert('인증에 실패했습니다. 인증번호를 확인해주세요.')
             console.error(error);
         }
     }

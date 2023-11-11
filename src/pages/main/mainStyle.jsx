@@ -50,6 +50,7 @@ export const OneMoreWatering = styled.img`
 `
 export const Plant = styled.img`
     width: 50%;
+    background-color: blue;
     `
 
 export const Quotes = styled.div`
