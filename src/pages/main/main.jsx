@@ -67,6 +67,10 @@ export default function MainPage(){
         }
     }, []);
 
+    useEffect(() => {
+        userInfo();
+    }, [isAdOpen]);
+
         return(
         <styles.MainContainer style={{
             backgroundImage: `url(${backgroundImage})`,

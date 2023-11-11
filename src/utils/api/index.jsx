@@ -71,8 +71,8 @@ static async postRegister(email,pw,phonenum) {
 
     static async postWatering() {
         try{
-            const response = await apicall.post(`/api/accounts/update/watering/`);
-            return
+            const response = await apicall.post(`/api/posts/watering/`);
+            return response
         } catch(error){
             console.error(error);
             throw error;
@@ -133,6 +133,15 @@ static async postRegister(email,pw,phonenum) {
         }
     }
     
+    static async getAdvertise(){
+        try{
+            const response = await apicall.get(`/api/advertises/advertise/`);
+            return response.data;
+        } catch(error){
+            console.error(error);
+            throw error;
+        }
+    }
 }
 
 export default UserApi;
