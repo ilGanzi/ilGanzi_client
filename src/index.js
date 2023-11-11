@@ -19,6 +19,7 @@ import store from './utils/store/index';
 import Signup from './pages/signup/signup';
 import FindID from './pages/FindID/findID';
 import FindPW from './pages/FindPW/findPW';
+import HowToUse from './pages/HowToUse/HowToUse' //모달로 해야한다면 삭제해야함
 import { PersistGate } from 'redux-persist/integration/react';
 import {persistStore} from 'redux-persist';
 import axios from 'axios';
@@ -54,7 +55,10 @@ const router = createBrowserRouter([
   }, {
     path: "/findPW",
     element: <FindPW />
-  }
+  }, {
+    path: "/HowToUse",
+    element: <HowToUse />
+  } //모달로 한다면 삭제해야함
 ]);
 
 
