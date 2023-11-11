@@ -1,31 +1,41 @@
 // axiosInterceptor.js
+// axiosInterceptor.js
 import axios from 'axios';
 import store from '../store';
 import { login, setAccessToken } from '../store/reducer/user';
 
+let importAccessToken = ""; // 변수를 인터셉터 외부에서 선언
 
 const apicall = axios.create({
   baseURL: 'https://ilganziback-lvwun.run.goorm.site', // API 기본 URL 설정
   timeout: 5000,
   headers: {
-    Authorization : axios.defaults.headers.common.Authorization,
+    Authorization: importAccessToken === "" ? `Bearer ${importAccessToken}` : undefined, // Bearer 추가
   }
 });
+
+export const setAuthHeader = (token) => {
+  importAccessToken = token; // setAuthHeader 함수를 사용하여 importAccessToken 설정
+};
 
 // 토큰 넣어서 보내는 요청 인터셉터 설정
 apicall.interceptors.request.use(async (config) => {
   const refreshToken = localStorage.getItem('refToken');
-  const accToken = axios.defaults.headers.common.Authorization;
+
+  // 인터셉터에서 헤더 설정을 config.headers.Authorization으로 변경
+  config.headers.Authorization = importAccessToken ? `Bearer ${importAccessToken}` : undefined;
+
   // 엑세스 토큰이 없는 경우에만 리프레시 시도
-  if (!accToken && refreshToken) {
+  if (!importAccessToken && refreshToken) {
     try {
       const refreshResponse = await axios.post('/api/accounts/auth/refresh/', {
         refresh: refreshToken
       });
       const newAccessToken = refreshResponse.data.access;
-      
+
       if (newAccessToken) {
-        config.headers.Authorization = `Bearer ${newAccessToken}`;
+        importAccessToken = newAccessToken; // importAccessToken 업데이트
+        config.headers.Authorization = `Bearer ${newAccessToken}`; // config에 새로운 엑세스 토큰 설정
       }
     } catch (error) {
       // 리프레시 토큰을 사용해 엑세스 토큰을 갱신하는 중에 에러가 발생할 수 있으므로 처리가 필요

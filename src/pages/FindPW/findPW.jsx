@@ -6,6 +6,7 @@ import { login } from "../../utils/store/reducer/user"; //변경하신다면 Fin
 import { useNavigate } from "react-router-dom";
 import { useSetScreenSize } from "../../setScreenHeight";
 import PwSetting from "../../components/pwsetting/pwsetting"
+import { setAuthHeader } from "../../utils/interceptor/axiosInterceptor";
 
 export default function Login(){
     const [email, setEmail] = useState("");
@@ -37,6 +38,7 @@ export default function Login(){
         try{
             const data = await UserApi.postCheckAuth(email,authNum);
             setAuthCheckComponent(true);
+            setAuthHeader(data.access);
         }catch(error) {
             alert('인증에 실패했습니다. 인증번호를 확인해주세요.')
             console.error(error);

@@ -97,6 +97,7 @@ export default function SettingPage() {
     const register = await UserApi.postRegister(loginEmail,pw,phoneNum);
     dispatch(login({
         isAuthorized: true,
+        accessToken: register.token.access,
     }));
     console.log(register);
     alert("회원가입이 완료되었습니다.");
@@ -115,14 +116,14 @@ export default function SettingPage() {
         <styles.Signup_Title>회원가입</styles.Signup_Title>
         <styles.Signup_mention>회원가입 확인 및 가입을 진행합니다.</styles.Signup_mention>
         <styles.NameInputSection>
-          <styles.field_mention>전화번호(-를 포함하지 않습니다)</styles.field_mention>
+          <styles.field_mention>전화번호</styles.field_mention>
           <styles.NameInput
             onChange={handleNameChange}
-            placeholder='전화번호'
+            placeholder='전화번호(- 없이 숫자만 입력)'
           />
         </styles.NameInputSection>
         <styles.emailID_InputSection>
-        <styles.field_mention>아이디(네이버 메일주소만 가능해요)</styles.field_mention>
+        <styles.field_mention>이메일 (네이버 메일주소만 가능해요)</styles.field_mention>
           <styles.EmailInputWrapper>
           <styles.EmailID_Input
             onChange={handleEmailIDChange}
@@ -163,7 +164,7 @@ export default function SettingPage() {
         <styles.PasswordInputWrapper
           style={{
             backgroundColor: 'white',
-            border: (IPWError && ipwTouched) ? '3px solid red' : (ipwTouched ? '1px solid black' : '1px solid gray'),
+            border: (CPWError && ipwTouched) ? '3px solid red' : (ipwTouched ? '1px solid black' : '1px solid gray'),
           }}>
           <styles.PassWord_Check
             onChange={handlePasswordCheck}
@@ -182,11 +183,6 @@ export default function SettingPage() {
             </div>
           )}
         </styles.PassWord_CheckSection>
-        <styles.TermsOpen onClick={onClickTerms}>이용 약관</styles.TermsOpen>
-        <styles.TermsWrapper>
-          <input type='checkbox'/>
-          <styles.TermsText>asfasf</styles.TermsText>
-        </styles.TermsWrapper>
         <styles.ButtonWrapper>
         <styles.FinishButton
           onClick={() => onSubmitSignup(ID,IPW,Name)}

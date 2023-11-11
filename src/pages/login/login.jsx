@@ -15,10 +15,10 @@ export default function Login(){
     const [pw, setPw] = useState("");
     const [showPw,setShowPw] = useState(false);
     const dispatch = useDispatch();
-    const authtest = useSelector((state) => state.user)
+    const userData = useSelector((state) => state.user)
     const navigate = useNavigate();
     const [isLoading,setIsLoading] = useState(false);
-    const viewIntro = localStorage.getItem("visited")
+    const viewIntro = localStorage.getItem("visited");
 
     const onClickLogin = async (email,pw) => {
         setIsLoading(true)
@@ -27,6 +27,7 @@ export default function Login(){
         const loginData = await UserApi.postLogin(loginEmail,pw);
         dispatch(login({
             isAuthorized: true,
+            accessToken: loginData.token.access,
         }));
         localStorage.setItem("refToken",loginData.token.refresh)
         console.log('damn')
@@ -46,8 +47,11 @@ export default function Login(){
         if(!viewIntro){
             navigate('/intro')
         }else{
+            if(userData.value.isAuthorized){
+                navigate('/')
+            }
         }
-    })
+    },[])
 
     return(
         <styles.Container>
