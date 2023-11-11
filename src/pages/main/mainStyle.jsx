@@ -36,7 +36,7 @@ export const Watering = styled.div`
     font-size: 20px;
     font-weight: 700;
     text-decoration: underline;
-    padding: 20px;
+    padding: 20px 20px 0px 20px;
     `
 export const OneMoreWateringSection = styled.div`
     display: flex;
@@ -51,6 +51,7 @@ export const OneMoreWatering = styled.img`
 export const Plant = styled.img`
     width: 50%;
     background-color: blue;
+    padding-bottom: 30px;
     `
 
 export const Quotes = styled.div`

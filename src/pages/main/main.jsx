@@ -90,7 +90,7 @@ export default function MainPage(){
             <styles.OneMoreWateringSection>
             <styles.OneMoreWatering src={oneMoreWatering}/>
             <styles.Watering
-            onClick={setIsAdOpen}
+            onClick={onClickWatering}
             style={{paddingTop: '0px'}}
             >한번 더 물주기</styles.Watering>
             </styles.OneMoreWateringSection> ) :
