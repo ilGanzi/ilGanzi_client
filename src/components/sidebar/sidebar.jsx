@@ -31,7 +31,8 @@ const Sidebar = ({isOpen,setIsOpen}) => {
 
   const onClickLogout = () => {
         dispatch(logout({
-          isAuthorized: false
+          isAuthorized: false,
+          accessToken: "",
         }));
         delete axios.defaults.headers.common['Authorization'];
         localStorage.setItem("refToken","");

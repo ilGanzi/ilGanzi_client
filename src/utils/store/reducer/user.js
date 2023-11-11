@@ -3,6 +3,7 @@ import { createSlice } from '@reduxjs/toolkit';
 const initialStateValue = { 
     value: {
         isAuthorized: false,
+        accessToken: "",
         }
      };
 

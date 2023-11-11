@@ -1,7 +1,7 @@
 import axios from "axios";
 import { login, setAccessToken } from "../store/reducer/user";
 import { useNavigate } from "react-router-dom";
-import { apicall } from "../interceptor/axiosInterceptor";
+import { apicall, setAuthHeader } from "../interceptor/axiosInterceptor";
 import { useDispatch, useSelector } from "react-redux";
 class UserApi {
     static async postLogin(email,pw){
@@ -11,9 +11,6 @@ class UserApi {
                 password: pw,
             };
             const response = await apicall.post(`/api/accounts/auth/`,loginData);
-            const accessToken = response.data.token.access;
-            axios.defaults.headers.common['Authorization'] = `Bearer ${accessToken}`;
-            alert(axios.defaults.headers.common.Authorization);
             return response.data
         } catch(error){
             console.error(error)
@@ -31,13 +28,10 @@ static async postRegister(email,pw,phonenum) {
                 phoneNumber: phonenum,
             };
             const response = await apicall.post(`/api/accounts/register/`, registerData);
-            const accessToken = response.data.token.access;
-            axios.defaults.headers.common['Authorization'] = `Bearer ${accessToken}`;
-            alert(axios.defaults.headers.common.Authorization);
-            return accessToken;
+            return response.data
         } catch(error){
             console.error(error);
-            alert("인터넷 연결을 확인 후 다시 시도해 주세요.")
+            alert("인터넷 연결을 확인 후 다시 시도해 주세요.");
             throw error;
         }
     };
@@ -50,7 +44,6 @@ static async postRegister(email,pw,phonenum) {
             const response = await apicall.patch(`/api/accounts/user/`,nameData);
         } catch(error){
             console.error(error);
-            alert(axios.defaults.headers.common.Authorization);
             throw error;
         }
     };
@@ -120,8 +113,7 @@ static async postRegister(email,pw,phonenum) {
                 code: code,
             };
             const response = await apicall.patch(`/api/accounts/findpw/`,authData);
-            const tempaccessToken = response.data.access;
-            axios.defaults.headers.common['Authorization'] = `Bearer ${tempaccessToken}`
+            return response.data
         } catch(error){
             console.error(error);
             throw error;

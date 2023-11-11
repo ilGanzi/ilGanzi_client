@@ -27,6 +27,7 @@ export default function Login(){
         const loginData = await UserApi.postLogin(loginEmail,pw);
         dispatch(login({
             isAuthorized: true,
+            accessToken: loginData.token.access,
         }));
         localStorage.setItem("refToken",loginData.token.refresh)
         console.log('damn')

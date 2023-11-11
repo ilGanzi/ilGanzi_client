@@ -12,6 +12,7 @@ import { useNavigate } from "react-router-dom";
 import LoadingScreen from '../../components/loading/loading';
 import { useSelector } from "react-redux"
 import UserApi from '../../utils/api';
+import { setAuthHeader } from '../../utils/interceptor/axiosInterceptor';
 
 
 export default function MainPage(){
@@ -35,12 +36,8 @@ export default function MainPage(){
         setIsOpen(true);
     };
 
-    const onClickWatering = async () => {
-        try{
-            const water = await UserApi.postWatering();
-        } catch(error){
-            alert('인터넷 연결을 확인하고 다시 시도해 주세요.')
-        }
+    const onClickWatering = () => {
+        setIsAdOpen(true);
     };
     
     const userInfo = async () => {
@@ -60,21 +57,15 @@ export default function MainPage(){
         }
     };
     
-    
-    
     useEffect(() => {
         if (!userData.value.isAuthorized) {
             navigate('/login');
             console.log("err");
         }else{
+            setAuthHeader(userData.value.accessToken);
             userInfo();
         }
     }, []);
-
-    useEffect(() => {
-
-    })
-
 
         return(
         <styles.MainContainer style={{

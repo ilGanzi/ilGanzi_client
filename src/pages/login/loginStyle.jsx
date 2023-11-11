@@ -20,7 +20,7 @@ export const ServiceInfo = styled.div`
     padding: 30% 20px 20% 20px;
 `
 export const LogoImage = styled.img`
-    width: 100%;
+    width: 80%;
     `
 
 export const SubTitle = styled.div`
@@ -42,7 +42,7 @@ export const LoginInfo = styled.div`
 
 export const Classify = styled.div`
     width: 100%;
-    font-size: px;
+    font-size: 16px;
     font-weight: 700;
     `
 
@@ -84,7 +84,7 @@ export const LoginButton = styled.button`
     font-size: 20px;
     box-sizing: border-box;
     color: white;
-    background-color: #23e04d;
+    background-color: #009456;
     text-align: center;
     font-weight: 700;
     border-radius: 16px;
@@ -99,21 +99,24 @@ export const LoginOption = styled.div`
 
 export const ForgotId = styled(Link)`
     width: 30%;
-    font-size: 13px;
+    font-size: 15px;
     color: #808080;
     text-align: center;
     border-right: 1px solid #bdbdbd;
+    text-decoration: none;
 `
 export const ForgotPw = styled(Link)`
     width: 30%;
-    font-size: 13px;
+    font-size: 15px;
     color: #808080;
     text-align: center;
     border-right: 1px solid #bdbdbd;
+    text-decoration: none;
 `
 export const Signup = styled(Link)`
     width: 30%;
-    font-size: 13px;
+    font-size: 15px;
     color: #808080;
     text-align: center;
+    text-decoration: none;
 `
