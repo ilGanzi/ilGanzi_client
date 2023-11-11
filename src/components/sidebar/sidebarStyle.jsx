@@ -35,12 +35,12 @@ export const Button = styled(FontAwesomeIcon)`
     font-size: 30px;
   `
 
-  export const openBtn = styled.div`
+export const openBtn = styled.div`
     width: 100%;
     height: 100%;
   `
 
-  export const Content = styled.div`
+export const Content = styled.div`
     padding: 20px;
     width: 100%;
     display: flex;
@@ -54,5 +54,6 @@ export const ContentLink = styled.div`
   font-size: 20px;
   font-weight: 700;
 `
+
 
 
