@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import * as styles from "./sidebarStyle";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBars, faBook, faTree, faRightFromBracket } from "@fortawesome/free-solid-svg-icons";
+import { faBars, faBook, faTree, faRightFromBracket} from "@fortawesome/free-solid-svg-icons";
 import UserApi from "../../utils/api";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
@@ -57,7 +57,7 @@ const Sidebar = ({ isOpen, setIsOpen }) => {
         <styles.Button icon={faBars} onClick={toggleSide} onKeyDown={toggleSide}/>
         </styles.SidebarHead>
         <styles.Content>
-          <styles.ContentIcon icon={faGift}/>
+          <styles.ContentIcon icon={faTree}/>
           <styles.ContentLink onClick={onClickHTU}>이용 방법</styles.ContentLink>
         </styles.Content>
         <styles.Content style={{paddingBottom: '50px', borderBottom: '1px solid lightgrey'}}>
