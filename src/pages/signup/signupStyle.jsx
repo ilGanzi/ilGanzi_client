@@ -41,7 +41,7 @@ export const field_mention = styled.div`
     justify-content: flex-start;
     font-weight: 700;
     font-style : normal;
-    font-size: 16px;
+    font-size: 20px;
     line-height: normal;
     padding: 7px 14px 14px 7px;
     `
@@ -93,7 +93,7 @@ export const EmailInputWrapper = styled.div`
     width: 80%;
     display: flex;
     justify-content: center;
-    border: 1px solid black;
+    border: 1px solid grey;
     border-radius: 16px;
     padding: 5px 20px 5px 20px;
     align-items: center;
@@ -101,9 +101,8 @@ export const EmailInputWrapper = styled.div`
 
 export const PassWord_CheckSection = styled.div`
     width: 100%;
-    padding: 0px 20px 10px 20px;
+    padding: 0px 20px 30px 20px;
     flex-direction: column;
-    box-sizing: boredr-box;
     display: flex
     justify-content: space-between;
     `
@@ -174,17 +173,19 @@ export const NameInputInform = styled.div`
 
 export const ButtonWrapper = styled.div`
     width: 100%;
+    padding-right: 25px;
     display: flex;
     flex-direction: column;
+    box-sizing: border-box;
     `
 export const FinishButton = styled.button`
-    width: 90%;
+    width: 100%;
     background-color: #e9e9e9;
     color: #777777;
     display: flex;
     justify-content: center;
     border: none;
-    padding: 16px 20px 16px 20px;
+    padding: 16px;
     border-radius: 16px;
     font-size: 16px;
     `

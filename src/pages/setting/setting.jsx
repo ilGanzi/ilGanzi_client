@@ -1,14 +1,18 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useSetScreenSize } from '../../setScreenHeight';
 import * as styles from './settingstyle'
 import UserApi from '../../utils/api';
 import { useNavigate } from 'react-router-dom';
+import { setAuthHeader } from '../../utils/interceptor/axiosInterceptor';
+import { useSelector } from 'react-redux';
+
 
 export default function SettingPage(){
     useSetScreenSize();
     const [treeName, setTreeName] = useState("");
     const [regexError,setRegexError] = useState(false);
     const navigate = useNavigate();
+    const userData = useSelector((state) => state.user)
 
     const onChangeTreeName = (e) => {
         //값이 숫자인지 검사하는 정규식
@@ -28,11 +32,15 @@ export default function SettingPage(){
             alert('나무 이름이 설정되었습니다.');
             navigate('/onborn');
         } catch(error){
+            alert('인터넷 연결을 확인 후 다시 시도해 주세요.')
             console.error(error);
         }
     }
     
-
+    useEffect(()=> {
+        setAuthHeader(userData.value.accessToken);
+    },[])
+    
     return(
         <styles.SettingContainer>
             <styles.SettingWrapper>

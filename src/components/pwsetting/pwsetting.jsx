@@ -6,6 +6,7 @@ import { useState } from "react";
 import UserApi from "../../utils/api";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { useSelector } from "react-redux";
 
 
 const PwSetting = () => {
@@ -13,6 +14,8 @@ const PwSetting = () => {
     const [newPw, setNewPw] = useState("");
     const [pwTouched,setPwTouched] = useState(false);
     const [regexError, setRegexError] = useState(false);
+    const userData = useSelector((state) => state.user);
+
     const navigate = useNavigate();
     useSetScreenSize();
     

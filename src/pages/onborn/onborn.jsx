@@ -7,9 +7,12 @@ import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import LoadingScreen from "../../components/loading/loading";
 import UserApi from "../../utils/api";
+import { setAuthHeader } from "../../utils/interceptor/axiosInterceptor";
+import { useSelector } from "react-redux";
 
 export default function OnBorn() {
     useSetScreenSize();
+    const userData = useSelector((state) => state.user)
     const [name,setName] = useState("");
     const [isLoading,setIsLoading] = useState(true);
     const userInfo = async () => {
@@ -22,6 +25,7 @@ export default function OnBorn() {
         }
     };
     useEffect(() => {
+        setAuthHeader(userData.value.accessToken);
         userInfo();
     },[])
 
